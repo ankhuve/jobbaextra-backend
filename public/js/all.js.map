@@ -1,0 +1,1 @@
+{"version":3,"sources":["app.js"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"all.js","sourcesContent":["vm = require('vue');\r\n\r\nconsole.log(\"hej\");\r\nvm = new Vue();\r\n\r\nvm.debug = true;\r\n\r\n"],"sourceRoot":"/source/"}

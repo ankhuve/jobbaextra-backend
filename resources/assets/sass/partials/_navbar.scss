@@ -1,0 +1,11 @@
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+    position: fixed;
+    z-index: 1000;
+    border-width: 0 0 1px;
+    top: 0;
+    width: 100%;
+}
