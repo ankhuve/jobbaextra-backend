@@ -21,6 +21,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
         'role' => 2,
         'paying' => random_int(0,1),
+        'paid_until' => Carbon::now()->addDays(random_int(1,30)),
     ];
 });
 

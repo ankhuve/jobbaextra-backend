@@ -20,7 +20,7 @@ Route::group(['middleware' => ['auth']], function () {
 
 
 Route::get('/', 'DashboardController@index');
-Route::get('/featured', 'DashboardController@companyJobs');
+Route::get('/featured', 'DashboardController@featured');
 
 Route::get('/{company}', 'DashboardController@companyJobs');
 Route::post('/{company}/setPaying', 'CompanyController@setPaying');

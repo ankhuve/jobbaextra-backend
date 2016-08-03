@@ -5794,11 +5794,39 @@ body {
 .panel .bs-callout {
   margin: 20px 20px; }
 
-.fa-check {
+table .fa-check {
   color: #2bbb30; }
 
 .fa-times {
   color: #bb1b23; }
+
+.flash-message {
+  position: fixed;
+  bottom: 5rem;
+  right: 5rem;
+  background: #2bbb30;
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 300;
+  padding: 2rem 4rem;
+  width: 200px;
+  z-index: 1000;
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+  display: none; }
+
+.btn {
+  border: none; }
+
+.btn:focus {
+  outline: none; }
+
+.btn-submit {
+  transition: all 0.25s; }
+
+.error {
+  display: none; }
 
 /*
  * Top navigation
@@ -5849,5 +5877,30 @@ body {
 .nav-sidebar > .active > a:focus {
   color: #fff;
   background-color: #428bca; }
+
+.spinner {
+  text-align: center; }
+
+.spinner > div {
+  width: 10px;
+  height: 10px;
+  margin-left: 3px;
+  background-color: white;
+  border-radius: 100%;
+  display: inline-block;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both; }
+
+.spinner .bounce1 {
+  animation-delay: -0.32s;
+  margin-left: 0; }
+
+.spinner .bounce2 {
+  animation-delay: -0.16s; }
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    transform: scale(0); }
+  40% {
+    transform: scale(1); } }
 
 /*# sourceMappingURL=app.css.map */

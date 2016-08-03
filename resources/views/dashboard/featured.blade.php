@@ -17,15 +17,13 @@
             </thead>
             <tbody>
 
-            @if(isset($jobs))
-                @foreach($jobs as $job)
+            @if(isset($companies))
+                @foreach($companies as $company)
 
                     <tr>
-                        <td>{{ $job->title }}</td>
-                        <td>{{ $job->latest_application_date }}</td>
-                        <td>{{ $job->contact_email }}</td>
-                        <td>{{ $job->type }}</td>
-                        <td>{{ $job->county }}</td>
+                        <td>{{ $company->company->name }}</td>
+                        <td>{{ $company->company->email }}</td>
+                        <td>{{ $company->company->created_at }}</td>
                     </tr>
 
                 @endforeach

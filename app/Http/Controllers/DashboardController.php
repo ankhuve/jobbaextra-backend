@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\FeaturedCompany;
 use App\Job;
 use App\User;
 use Illuminate\Http\Request;
@@ -59,8 +60,8 @@ class DashboardController extends Controller
      */
     public function featured()
     {
-        $company = User::find(1);
+        $companies = FeaturedCompany::all();
 
-        return view('dashboard.company', compact('jobs', 'company'));
+        return view('dashboard.featured', compact('companies', 'companies'));
     }
 }

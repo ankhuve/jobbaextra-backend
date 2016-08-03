@@ -85,10 +85,51 @@ body {
     }
 }
 
-.fa-check{
+table .fa-check{
     color: #2bbb30;
 }
 
 .fa-times{
     color: #bb1b23;
+}
+
+.flash-message {
+    position: fixed;
+    bottom: 5rem;
+    right: 5rem;
+    background: #2bbb30;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 300;
+    padding: 2rem 4rem;
+    width: 200px;
+    z-index: 1000;
+    text-align: center;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
+    -moz-box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
+    display: none;
+}
+
+.btn{
+    border: none;
+}
+
+.btn:focus{
+    outline: none;
+}
+
+.btn-submit{
+    -webkit-transition: all 0.25s;
+    -moz-transition: all 0.25s;
+    -ms-transition: all 0.25s;
+    -o-transition: all 0.25s;
+    transition: all 0.25s;
+}
+
+.error{
+    display: none;
 }

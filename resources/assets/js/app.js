@@ -1,7 +1,10 @@
-vm = require('vue');
+var Vue = require('vue');
 
-console.log("hej");
-vm = new Vue();
+var vm = new Vue({
+    el: '#app',
+    data: {
+        message: 'Hello Vue.js!'
+    }
+});
 
-vm.debug = true;
-
+console.log(vm);

@@ -13,11 +13,12 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
 
-    mix.scriptsIn('resources/assets/js');
+    //mix.scriptsIn('resources/assets/js');
 
-    mix.sass('app.scss');
+    mix.sass('app.scss')
+        .browserify('app.js')
+        .browserSync({
+            proxy: 'jobbaextra-back.app'
+        });
 
-    mix.browserSync({
-        proxy: 'jobbaextra-back.app'
-    });
 });

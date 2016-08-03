@@ -18,4 +18,14 @@ class FeaturedCompany extends Model
         'start_date',
         'end_date',
     ];
+
+    /**
+     * A user may create many jobs.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function company()
+    {
+        return $this->belongsTo('App\User');
+    }
 }
