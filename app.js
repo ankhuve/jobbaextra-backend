@@ -10210,6 +10210,99 @@ var vm = new Vue({
 
 console.log(vm);
 
-},{"vue":2}]},{},[3]);
+function setPaying(company) {
+    //e.preventDefault();
+    console.log(company);
+    var form = $(this);
+
+    $.ajax({
+        type: 'POST',
+        url: company + '/setPaying',
+        data: '_token = <?php echo csrf_token() ?>',
+        success: function success(data) {
+            console.log(data);
+        }
+    });
+
+    //$.post('/' + companyId + '/setPaying', companyId).then(function(data){
+    //    console.log(data);
+    //});
+    //console.log(companyId);
+}
+
+var toggleDatePicker = function toggleDatePicker() {
+    $('#paying-date-picker').toggle(200);
+};
+
+(function () {
+    var submitAjaxRequest = function submitAjaxRequest(e) {
+        console.log("triggad");
+        var form = $(this);
+        var method = form.find('input[name="_method"]').val() || 'POST';
+        var submitButton = form.find('button[data-submit]');
+        submitButton.html('<div class="spinner">' + '<div class="bounce1"></div>' + '<div class="bounce2"></div>' + '<div class="bounce3"></div>' + '</div>');
+
+        $.ajax({
+            type: method,
+            url: form.prop('action'),
+            data: form.serialize(),
+            success: function success(data) {
+                demonstrateSuccessOnButton(submitButton);
+                // ändra texten och klass på rutan så den ändrar stil
+                console.log(data);
+                $.publish('form.submitted', form);
+            },
+            fail: function fail(e) {
+                var errorMsg = form.find('.error');
+                errorMsg.find('span').html(e.statusText);
+                form.find('.error').fadeIn(500);
+            }
+
+        });
+
+        e.preventDefault();
+    };
+
+    var demonstrateSuccessOnButton = function demonstrateSuccessOnButton(button) {
+        button.addClass('btn-success');
+        button.html('<i class="fa fa-check"></i>');
+        setTimeout(function () {
+            button.removeClass('btn-success');
+            button.html('Spara');
+        }, 1500);
+    };
+
+    $.subscribe('form.submitted', function (e) {
+        $('.flash-message').fadeIn(500).delay(1500).fadeOut(500);
+    });
+
+    $('form[data-remote]').on('submit', submitAjaxRequest);
+})();
+
+},{"vue":2}],4:[function(require,module,exports){
+"use strict";
+
+/* jQuery Tiny Pub/Sub - v0.7 - 10/27/2011
+ * http://benalman.com/
+ * Copyright (c) 2011 "Cowboy" Ben Alman; Licensed MIT, GPL */
+
+(function ($) {
+
+    var o = $({});
+
+    $.subscribe = function () {
+        o.on.apply(o, arguments);
+    };
+
+    $.unsubscribe = function () {
+        o.off.apply(o, arguments);
+    };
+
+    $.publish = function () {
+        o.trigger.apply(o, arguments);
+    };
+})(jQuery);
+
+},{}]},{},[3,4]);
 
 //# sourceMappingURL=app.js.map

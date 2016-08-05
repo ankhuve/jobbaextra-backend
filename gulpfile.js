@@ -16,9 +16,10 @@ elixir(function(mix) {
     //mix.scriptsIn('resources/assets/js');
 
     mix.sass('app.scss')
-        .browserify('app.js')
+        .browserify(['pubsub.js', 'app.js'])
         .browserSync({
-            proxy: 'jobbaextra-back.app'
+            proxy: 'jobbaextra-back.app',
+            port: 4000
         });
 
 });

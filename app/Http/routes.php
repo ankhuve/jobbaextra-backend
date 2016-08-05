@@ -24,3 +24,5 @@ Route::get('/featured', 'DashboardController@featured');
 
 Route::get('/{company}', 'DashboardController@companyJobs');
 Route::post('/{company}/setPaying', 'CompanyController@setPaying');
+Route::post('/{company}/setFeatured', 'CompanyController@setFeatured');
+Route::post('/{company}/setLogo', 'CompanyController@setLogo');

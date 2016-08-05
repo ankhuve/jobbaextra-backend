@@ -73,6 +73,9 @@ body {
     &.bs-callout-warning{
         border-left-color: #fadd7a;
     }
+    &.bs-callout-danger{
+        border-left-color: #fa4140;
+    }
 
     p:last-child {
         margin-bottom: 0;
@@ -89,7 +92,7 @@ table .fa-check{
     color: #2bbb30;
 }
 
-.fa-times{
+table .fa-times{
     color: #bb1b23;
 }
 

@@ -19,6 +19,10 @@ function setPaying(company){
     //console.log(companyId);
 }
 
+var toggleDatePicker = function(){
+    $('#paying-date-picker').toggle(200);
+};
+
 (function(){
     var submitAjaxRequest = function(e) {
         console.log("triggad");
@@ -39,10 +43,11 @@ function setPaying(company){
             data: form.serialize(),
             success: function (data) {
                 demonstrateSuccessOnButton(submitButton);
+                // ändra texten och klass på rutan så den ändrar stil
                 console.log(data);
                 $.publish('form.submitted', form);
             },
-            error: function(e){
+            fail: function(e){
                 var errorMsg = form.find('.error');
                 errorMsg.find('span').html(e.statusText);
                 form.find('.error').fadeIn(500);

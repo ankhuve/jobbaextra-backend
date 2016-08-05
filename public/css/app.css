@@ -5788,6 +5788,8 @@ body {
     border-left-color: #1b809e; }
   .bs-callout.bs-callout-warning {
     border-left-color: #fadd7a; }
+  .bs-callout.bs-callout-danger {
+    border-left-color: #fa4140; }
   .bs-callout p:last-child {
     margin-bottom: 0; }
 
@@ -5797,7 +5799,7 @@ body {
 table .fa-check {
   color: #2bbb30; }
 
-.fa-times {
+table .fa-times {
   color: #bb1b23; }
 
 .flash-message {

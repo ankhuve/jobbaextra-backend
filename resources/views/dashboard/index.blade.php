@@ -15,6 +15,7 @@
                 <th>E-mail</th>
                 <th>Konto skapat</th>
                 <th>Betalande kund</th>
+                <th>Attraktiv arbetsgivare</th>
             </tr>
             </thead>
             <tbody>
@@ -27,7 +28,8 @@
                         <td>{{ $company->numJobs() }}</td>
                         <td>{{ $company->email }}</td>
                         <td>{{ $company->created_at }}</td>
-                        <td>{!! $company->paying === 1 ? '<i class="fa fa-check" aria-hidden="true"></i>' : '<i class="fa fa-times" aria-hidden="true"></i>' !!}</td>
+                        <td>{!! $company->isPaying() ? '<i class="fa fa-check" aria-hidden="true"></i>' : '<i class="fa fa-times" aria-hidden="true"></i>' !!}</td>
+                        <td>{!! $company->isFeatured() ? '<i class="fa fa-check" aria-hidden="true"></i>' : '<i class="fa fa-times" aria-hidden="true"></i>' !!}</td>
                     </tr>
 
                 @endforeach

@@ -34,7 +34,7 @@ $factory->define(App\Job::class, function (Faker\Generator $faker) {
         'county' => $faker->country,
         'municipality' => $faker->city,
         'description' => $faker->paragraph,
-        'latest_application_date' => $faker->dateTimeThisMonth,
+        'latest_application_date' => Carbon::now()->addDays(random_int(1,30)),
         'contact_email' => $faker->companyEmail,
         'published_at' => $faker->dateTime,
     ];

@@ -33,17 +33,98 @@ class User extends Authenticatable
         return $this->hasMany('App\Job');
     }
 
+    /**
+     *
+     * Returns how many jobs the company has created.
+     *
+     * @return bool
+     */
     public function numJobs()
     {
         $jobs = $this->jobs()->get();
         return(count($jobs));
     }
 
+
+    /**
+     *
+     * Check if company has created any jobs.
+     *
+     * @return bool
+     */
     public function hasJobs()
     {
         if($this->numJobs() > 0)
         {
             return true;
+        }
+        return false;
+    }
+
+
+    /**
+     *
+     * Check if company has an uploaded logotype.
+     *
+     * @return bool
+     */
+    public function hasLogo()
+    {
+        if($this->logo_path)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     *
+     * Check if company is paying.
+     *
+     * @return bool
+     */
+    public function isPaying()
+    {
+        if($this->paying)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     *
+     * Check if company is featured.
+     *
+     * @return bool
+     */
+    public function isFeatured()
+    {
+        $isFeatured = FeaturedCompany::where('company_id', $this->id)->get();
+        if(!$isFeatured->isEmpty())
+        {
+            return true;
+        };
+        return false;
+    }
+
+
+    /**
+     *
+     * If the company is featured, return the FeaturedCompany model,
+     * otherwise return false.
+     *
+     * @return mixed
+     */
+    public function featured()
+    {
+//        return $this->hasOne('App\FeaturedCompany');
+        if($this->isFeatured())
+        {
+            $featuredObj = FeaturedCompany::where('company_id', $this->id);
+            return $featuredObj;
         }
         return false;
     }
