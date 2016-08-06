@@ -22,7 +22,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('/', 'DashboardController@index');
 Route::get('/featured', 'DashboardController@featured');
 
-Route::get('/{company}', 'DashboardController@companyJobs');
+Route::get('/{company}', 'DashboardController@company');
 Route::post('/{company}/setPaying', 'CompanyController@setPaying');
 Route::post('/{company}/setFeatured', 'CompanyController@setFeatured');
 Route::post('/{company}/setLogo', 'CompanyController@setLogo');

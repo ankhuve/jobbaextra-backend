@@ -2,7 +2,7 @@
 
 @section('dashboard')
 
-    <h2 class="sub-header">{{ $company->name }}</h2>
+    <h2 class="sub-header">{{ $company->name }} <h4 class="help-block">{{ $company->email }}</h4></h2>
 
     <span id="companyPage" class="hidden"></span>
 

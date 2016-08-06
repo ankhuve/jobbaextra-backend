@@ -44,7 +44,7 @@ class DashboardController extends Controller
      * @param $company
      * @return View
      */
-    public function companyJobs($companyId)
+    public function company($companyId)
     {
         $jobs = Job::where('user_id', $companyId)->get(); // get the company's job ads
         $company = User::find($companyId);

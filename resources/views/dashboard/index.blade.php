@@ -24,7 +24,7 @@
                 @foreach($users as $company)
 
                     <tr>
-                        <td><a href="{{ action('DashboardController@companyJobs', ['company' => $company]) }}">{{ $company->name }}</a></td>
+                        <td><a href="{{ action('DashboardController@company', ['company' => $company]) }}">{{ $company->name }}</a></td>
                         <td>{{ $company->numJobs() }}</td>
                         <td>{{ $company->email }}</td>
                         <td>{{ $company->created_at }}</td>
