@@ -5,8 +5,17 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-                    <li class="active"><a href="#">Översikt <span class="sr-only">(current)</span></a></li>
-                    <li><a href="{{ url('register') }}">Registrera nytt företag</a></li>
+                    <li class="{{ Route::currentRouteName() === 'home' ? 'active' : '' }}">
+                        <a href="{{ route('home') }}">
+                            Översikt
+                            {!! Route::currentRouteName() === 'home' ? '<span class="sr-only">(current)</span>' : '' !!}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('register') }}">
+                            Registrera nytt företag
+                        </a>
+                    </li>
                 </ul>
             </div>
 

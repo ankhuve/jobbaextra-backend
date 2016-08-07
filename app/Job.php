@@ -35,4 +35,9 @@ class Job extends Model
     {
         return new static($data);
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
 }

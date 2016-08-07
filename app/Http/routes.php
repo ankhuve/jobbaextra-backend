@@ -14,15 +14,17 @@
 Route::auth();
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('register', 'Auth\AuthController@showRegistrationForm');
+    Route::get('register', 'Auth\AuthController@showRegistrationForm')->name('register');;
     Route::post('register', 'Auth\AuthController@registerCompany');
     });
 
 
-Route::get('/', 'DashboardController@index');
-Route::get('/featured', 'DashboardController@featured');
+Route::get('/', 'DashboardController@index')->name('home');;
+//Route::get('/featured', 'DashboardController@featured')->name('featured');
 
-Route::get('/{company}', 'DashboardController@company');
+Route::get('/{company}', 'DashboardController@company')->name('company');;
 Route::post('/{company}/setPaying', 'CompanyController@setPaying');
 Route::post('/{company}/setFeatured', 'CompanyController@setFeatured');
 Route::post('/{company}/setLogo', 'CompanyController@setLogo');
+Route::get('/{company}/edit/{id}', 'DashboardController@editJob');
+Route::post('/{company}/edit/{id}', 'DashboardController@saveJob');

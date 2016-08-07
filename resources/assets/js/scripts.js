@@ -68,9 +68,9 @@ var toggleDatePicker = function(){
 
     };
 
-    $.subscribe('form.submitted', function(e){
-        $('.flash-message').fadeIn(500).delay(1500).fadeOut(500);
-    });
+    //$.subscribe('form.submitted', function(e){
+    //    $('.flash-message').fadeIn(500).delay(1500).fadeOut(500);
+    //});
 
     $('form[data-remote]').on('submit', submitAjaxRequest)
 

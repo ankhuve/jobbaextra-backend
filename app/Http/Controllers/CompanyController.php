@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\FeaturedCompany;
 use App\Http\Requests\StoreCompanyLogo;
+use App\Job;
 use App\User;
 use Carbon\Carbon;
 //use Illuminate\Foundation\Auth\User;
@@ -126,6 +127,5 @@ class CompanyController extends Controller
         if($request->ajax())
             return response()->json(['path' => 'uploads/' . $fileName, 'logo' => 1]);
         return 'success';
-
     }
 }

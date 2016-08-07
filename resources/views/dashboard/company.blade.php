@@ -6,9 +6,9 @@
 
     <span id="companyPage" class="hidden"></span>
 
-    <div class="flash-message">
-        Uppdaterat!
-    </div>
+    {{--<div class="flash-message">--}}
+        {{--Uppdaterat!--}}
+    {{--</div>--}}
 
     <div class="row">
         <div class="col-lg-4">
@@ -36,22 +36,24 @@
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
+                        <th>Titel</th>
+                        <th>Roll</th>
+                        <th>Kontakt</th>
+                        <th>Kommun</th>
+                        <th>Publiceringsdatum</th>
+                        <th>Sista ansökan</th>
                     </tr>
                     </thead>
                     <tbody>
 
                     @foreach($jobs as $job)
                         <tr>
-                            <td>{{ $job->title }}</td>
-                            <td>{{ $job->latest_application_date }}</td>
-                            <td>{{ $job->contact_email }}</td>
+                            <td><a href="{{ URL::current() }}/edit/{{ $job->id }}">{{ $job->title }}</a></td>
                             <td>{{ $job->type }}</td>
-                            <td>{{ $job->county }}</td>
+                            <td>{{ $job->contact_email }}</td>
+                            <td>{{ $job->municipality }}</td>
+                            <td>{{ $job->published_at }}</td>
+                            <td>{{ $job->latest_application_date }}</td>
                         </tr>
                     @endforeach
 
