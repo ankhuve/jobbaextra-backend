@@ -151,6 +151,9 @@ $.subscribe('form.submitted', function (e) {
 // event listeners
 $('form[data-remote]').on('submit', submitAjaxRequest);
 $('form input[data-date-toggle]').on('click', toggleDatePicker);
+$('[data-confirm]').on('click', function (e) {
+    if (!confirm('Är du säker på att du vill ta bort jobbannonsen? Detta går inte att ångra.')) e.preventDefault();
+});
 
 $(document).on('ready', function () {
     onLoadChangePanelStyle();

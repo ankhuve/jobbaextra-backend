@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -127,5 +128,22 @@ class CompanyController extends Controller
         if($request->ajax())
             return response()->json(['path' => 'uploads/' . $fileName, 'logo' => 1]);
         return 'success';
+    }
+
+
+    /**
+     *
+     * Deletes a job.
+     *
+     * @param $companyId
+     * @param $jobId
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delete($companyId, $jobId)
+    {
+        $job = Job::find($jobId);
+        $job->delete();
+        return redirect()->route('company', ['company' => $companyId]);
     }
 }

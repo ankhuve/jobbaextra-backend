@@ -54,6 +54,7 @@
                             <td>{{ $job->municipality }}</td>
                             <td>{{ $job->published_at }}</td>
                             <td>{{ $job->latest_application_date }}</td>
+                            <td><a data-confirm="delete" href="{{ action('CompanyController@delete', ['jobId' => $job->id, 'company' => $company->id]) }}"><i class="fa fa-times"></i></a></td>
                         </tr>
                     @endforeach
 

@@ -3,7 +3,10 @@
 @section('dashboard')
     <h2 class="sub-header">Registrerade företag</h2>
     <div class="bs-callout bs-callout-info">
-        <p>Här är en massa text som förklarar saker.</p>
+        <p>Här ser du alla registrerade företag.
+            <br>
+            För att se mer information om ett företag kan du klicka på namnet.
+        </p>
         <p>Du kan även <a href="{{ url('register') }}">registrera ett nytt företag</a>.</p>
     </div>
     <div class="table-responsive">

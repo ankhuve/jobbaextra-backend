@@ -2,7 +2,11 @@
 
 @section('dashboard')
 
-    <h2 class="sub-header">Editera jobb</h2>
+    <h2 class="sub-header">Ändra jobb</h2>
+
+    <a href="/{{ $company->id }}" class="btn btn-warning col-md-2">
+        Tillbaka
+    </a>
 
     @if (session('status'))
         <div class="alert alert-success">
@@ -17,9 +21,9 @@
             <div class="panel-heading">
 
                 <h3 class="panel-title form-inline">
-                    <label for="title">Titel</label>
+                    <label for="work_place">Arbetsplats</label>
 
-                    {{ Form::text('title', $job->title, ['class' => 'form-control']) }}
+                    {{ Form::text('work_place', $job->work_place, ['class' => 'form-control']) }}
                 </h3>
             </div>
             <div class="panel-body">
@@ -35,9 +39,10 @@
                     @endif
 
                     <div class="form-group col-lg-6">
-                        <label for="work_place">Arbetsplats</label>
+                        <label for="title">Jobbtitel</label>
 
-                        {{ Form::text('work_place', $job->work_place, ['class' => 'form-control']) }}
+                        {{ Form::text('title', $job->title, ['class' => 'form-control']) }}
+
                     </div>
 
                 </div>
@@ -64,7 +69,17 @@
                         @if(array_key_exists('lan', $allFilters))
                             <div class="form-group col-lg-3">
                                 <label for="county">Län</label>
-                                {{ Form::select('county', $allFilters['lan'], $job->type, ['class' => 'form-control', 'placeholder' => 'Välj ett län..']) }}
+                                <select name="county" class="form-control">
+                                    <option value=''>Välj ett län..</option>
+                                    <option value='Norge' {{ $job->county === 'Norge' ? 'selected' : '' }}>Norge</option>
+                                    <option value='' disabled>--------</option>
+
+                                    @foreach($allFilters['lan'] as $key => $option)
+                                        <option value={{ $key }} label='{{ $option }}' name='{{ $option }}' {{($job->county == $key) ? 'selected' : ''}} >{{ $option }}</option>
+                                    @endforeach
+                                </select>
+
+{{--                                {{ Form::select('county', $allFilters['lan'], $job->type, ['class' => 'form-control', 'placeholder' => 'Välj ett län..']) }}--}}
                             </div>
                         @endif
                     @endif
@@ -85,12 +100,8 @@
                     </div>
 
                     <div class="form-group col-xs-12">
-                        <button data-submit type="submit" class="btn btn-primary btn-submit">Spara</button>
-                    </div>
-                    <div class="form-group col-xs-12">
-                        <a href="/{{ $company->id }}" class="btn btn-warning">
-                            Tillbaka
-                        </a>
+                        <button data-submit type="submit" class="btn btn-primary btn-submit col-md-2">Spara</button>
+
                     </div>
                 </div>
 
@@ -108,5 +119,6 @@
             </div>
         </div>
         {{ Form::close() }}
+
     </div>
 @endsection
