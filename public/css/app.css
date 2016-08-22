@@ -5802,6 +5802,9 @@ table .fa-check {
 table .fa-times {
   color: #bb1b23; }
 
+table .fa-external-link {
+  padding-right: 1rem; }
+
 .flash-message {
   position: fixed;
   bottom: 5rem;

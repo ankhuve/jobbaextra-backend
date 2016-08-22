@@ -7,8 +7,13 @@
                 <ul class="nav nav-sidebar">
                     <li class="{{ Route::currentRouteName() === 'home' ? 'active' : '' }}">
                         <a href="{{ route('home') }}">
-                            Översikt
+                            Alla företag
                             {!! Route::currentRouteName() === 'home' ? '<span class="sr-only">(current)</span>' : '' !!}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('jobs') }}">
+                            Alla jobb
                         </a>
                     </li>
                     <li>

@@ -19,7 +19,9 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
 
-Route::get('/', 'DashboardController@index')->name('home');;
+Route::get('/', 'DashboardController@index')->name('home');
+Route::get('/jobs', 'JobsController@index')->name('jobs');
+Route::post('/changeJobOwner', 'JobsController@changeJobOwner');
 //Route::get('/featured', 'DashboardController@featured')->name('featured');
 
 Route::get('/{company}', 'DashboardController@company')->name('company');

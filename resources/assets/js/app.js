@@ -11,7 +11,6 @@
 //console.log(vm);
 //
 
-
 function toggleDatePicker(){
     var target = $(this).data('date-toggle');
     $('#' + target + '-date-picker').toggle(200);
@@ -76,9 +75,19 @@ var submitAjaxRequest = function(e) {
             data: form.serialize(),
             success: function (data) {
                 demonstrateSuccessOnButton(submitButton);
-                // ändra texten och klass på rutan så den ändrar stil
-                changePanelStyle(data[target], $("#" + form.data('target') + "-panel"));
+                if(target === "changeOwner"){
+                    var $ownerButton = $('button[data-job-id=' + data.jobId + ']');
+                    $ownerButton.attr('data-current-owner', data.newOwnerId);
+                    $ownerButton.html(data.newOwnerName);
+                    setTimeout(function(){
+                        form.find('[data-dismiss=modal]').click();
+                    }, 500);
+                } else{
+                    // ändra texten och klass på rutan så den ändrar stil
+                    changePanelStyle(data[target], $("#" + form.data('target') + "-panel"));
+                }
                 $.publish('form.submitted', form);
+
             },
             error: function(e){
                 demonstrateSuccessOnButton(submitButton, false);
@@ -149,6 +158,15 @@ var demonstrateSuccessOnButton = function(button, success){
 
 };
 
+var setCurrentOwnerInSelect = function(){
+    var currentOwner = $(this).data('current-owner');
+    var jobId = $(this).data('job-id');
+    var $modal = $('#jobOwnerModal');
+    $modal.find('#jobId').val(jobId);
+    var company = $modal.find('select option.companyOption[value=' + currentOwner + ']');
+    company.attr('selected', 'selected');
+};
+
 $.subscribe('form.submitted', function(e){
     $('.flash-message').fadeIn(500).delay(1500).fadeOut(500);
 });
@@ -157,6 +175,7 @@ $.subscribe('form.submitted', function(e){
 // event listeners
 $('form[data-remote]').on('submit', submitAjaxRequest);
 $('form input[data-date-toggle]').on('click', toggleDatePicker);
+$('[data-toggle=modal]').on('click', setCurrentOwnerInSelect);
 $('[data-confirm]').on('click', function(e){
     if (!confirm('Är du säker på att du vill ta bort jobbannonsen? Detta går inte att ångra.')) e.preventDefault();
 });
