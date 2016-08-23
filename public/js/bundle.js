@@ -186,7 +186,7 @@ $(document).on('ready', function () {
         fontNamesIgnoreCheck: ['Roboto'],
         toolbar: [
         // [groupName, [list of button]]
-        ['style', ['bold', 'italic', 'underline', 'clear']], ['fontsize', ['fontsize']], ['fontname', ['fontname']], ['para', ['ul', 'ol', 'paragraph']], ['insert', ['link']], ['misc', ['undo', 'redo']]]
+        ['style', ['bold', 'italic', 'underline', 'clear']], ['fontsize', ['fontsize']], ['fontname', ['fontname']], ['color', ['color']], ['para', ['ul', 'ol', 'paragraph']], ['insert', ['link']], ['misc', ['undo', 'redo']]]
     });
 
     console.log($('.summernote').length);

@@ -196,6 +196,7 @@ $(document).on('ready', function(){
             ['style', ['bold', 'italic', 'underline', 'clear']],
             ['fontsize', ['fontsize']],
             ['fontname', ['fontname']],
+            ['color', ['color']],
             ['para', ['ul', 'ol', 'paragraph']],
             ['insert', ['link']],
             ['misc', ['undo', 'redo']]
