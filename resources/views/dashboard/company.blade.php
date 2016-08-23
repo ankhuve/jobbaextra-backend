@@ -37,7 +37,7 @@
                     <thead>
                     <tr>
                         <th>Titel</th>
-                        <th>Roll</th>
+                        <th>Yrkesområde</th>
                         <th>Kontakt</th>
                         <th>Kommun</th>
                         <th>Publiceringsdatum</th>

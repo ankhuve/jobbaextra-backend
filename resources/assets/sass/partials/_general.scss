@@ -88,13 +88,20 @@ body {
     }
 }
 
-table .fa-check{
-    color: #2bbb30;
+table{
+    .fa-check{
+        color: #2bbb30;
+    }
+
+    .fa-times{
+        color: #bb1b23;
+    }
+
+    .fa-external-link{
+        padding-right: 1rem;
+    }
 }
 
-table .fa-times{
-    color: #bb1b23;
-}
 
 .flash-message {
     position: fixed;
