@@ -4,10 +4,6 @@
 
     <h2 class="sub-header">Ändra jobb</h2>
 
-    <a href="/{{ $company->id }}" class="btn btn-warning col-md-2">
-        Tillbaka
-    </a>
-
     @if (session('status'))
         <div class="alert alert-success">
             {{ session('status') }}
@@ -49,7 +45,7 @@
 
                 <div class="form-group">
                     <label for="description">Beskrivning</label>
-                    {{ Form::textarea('description', $job->description, ['class' => 'form-control']) }}
+                    {!! Form::textarea('description', $job->description, ['class' => 'form-control summernote']) !!}
                 </div>
                 <div class="row">
 
@@ -101,6 +97,9 @@
 
                     <div class="form-group col-xs-12">
                         <button data-submit type="submit" class="btn btn-primary btn-submit col-md-2">Spara</button>
+                        <a href="/{{ $company->id }}" class="btn btn-warning col-md-2 pull-right">
+                            Tillbaka
+                        </a>
 
                     </div>
                 </div>
