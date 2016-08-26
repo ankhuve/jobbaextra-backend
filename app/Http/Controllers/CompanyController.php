@@ -104,6 +104,15 @@ class CompanyController extends Controller
 
     }
 
+
+    /**
+     *
+     * Handle a logo upload request.
+     *
+     * @param $companyId
+     * @param StoreCompanyLogo $request
+     * @return \Illuminate\Http\JsonResponse|string
+     */
     public function setLogo($companyId, StoreCompanyLogo $request)
     {
 //        $allFiles = Storage::disk('public')->files('/logos');
