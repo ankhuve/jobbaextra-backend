@@ -22,4 +22,6 @@ elixir(function(mix) {
             port: 4000
         });
 
+    mix.version(['css/app.css', 'js/bundle.js']);
+
 });

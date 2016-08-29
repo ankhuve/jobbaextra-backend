@@ -17,6 +17,9 @@ class FeaturedCompany extends Model
         'company_id',
         'start_date',
         'end_date',
+        'title',
+        'subtitle',
+        'description',
     ];
 
     /**
@@ -27,5 +30,19 @@ class FeaturedCompany extends Model
     public function company()
     {
         return $this->belongsTo('App\User');
+    }
+
+    /**
+     * Check if the company has made a presentation yet.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function hasPresentation()
+    {
+        if($this->title)
+        {
+            return true;
+        }
+        return false;
     }
 }

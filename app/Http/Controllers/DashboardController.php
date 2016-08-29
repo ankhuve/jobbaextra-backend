@@ -57,19 +57,6 @@ class DashboardController extends Controller
         return view('dashboard.company', compact('jobs', 'company'));
     }
 
-    /**
-     * Show all of the featured companies.
-     *
-     * @param $company
-     * @return View
-     */
-    public function featured()
-    {
-        $companies = FeaturedCompany::all();
-
-        return view('dashboard.featured', compact('companies'));
-    }
-
 
     public function editJob($companyId, $jobId)
     {

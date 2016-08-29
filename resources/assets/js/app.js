@@ -167,6 +167,44 @@ var setCurrentOwnerInSelect = function(){
     company.attr('selected', 'selected');
 };
 
+// Ladda upp en bild via summernote
+var summernote = [];
+function sendFile(file) {
+    var formData = new FormData();
+    formData.append("photo", file);
+
+    var $submitBtn = $(".btn-submit[data-submit]");
+    $submitBtn.prop('disabled', true);
+    $submitBtn.html(
+        '<div class="spinner">'+
+        '<div class="bounce1"></div>'+
+        '<div class="bounce2"></div>'+
+        '<div class="bounce3"></div>'+
+        '</div>'
+    );
+
+    $.ajax({
+        url: window.location.pathname + '/upload',
+        data: formData,
+        cache: false,
+        contentType: false,
+        processData: false,
+        dataType:"json",
+        type: 'POST',
+        success: function(data){
+            demonstrateSuccessOnButton($submitBtn);
+            var imgNode = document.createElement('img');
+            $(imgNode).attr('src', data.url);
+            summernote.summernote('insertNode', imgNode);
+        },
+        fail: function(data){
+            demonstrateSuccessOnButton($submitBtn, false);
+            console.log("Fel: ", data);
+        }
+    });
+
+}
+
 $.subscribe('form.submitted', function(e){
     $('.flash-message').fadeIn(500).delay(1500).fadeOut(500);
 });
@@ -181,6 +219,9 @@ $('[data-confirm]').on('click', function(e){
 });
 
 $(document).on('ready', function(){
+    $.ajaxSetup({
+        headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')}
+    });
     onLoadChangePanelStyle();
 
     $('.summernote').summernote({
@@ -188,6 +229,7 @@ $(document).on('ready', function(){
         height: 300,                 // set editor height
         minHeight: null,             // set minimum height of editor
         disableDragAndDrop: true,
+        maximumImageFileSize: 1048576,
         placeholder: 'Här beskriver du jobbets uppgifter, vad som förväntas av den jobbsökande, och kanske en kort företagsbeskrivning.',
         fontNames: ['Arial', 'Arial Black', 'Courier New', 'Helvetica', 'Impact', 'Roboto', 'Tahoma', 'Times New Roman', 'Verdana'],
         fontNamesIgnoreCheck: ['Roboto'],
@@ -203,7 +245,35 @@ $(document).on('ready', function(){
         ]
     });
 
-    console.log($('.summernote').length);
+    summernote = $('.summernote-extended').summernote({
+        lang: 'sv-SE', // default: 'en-US'
+        height: 300,                 // set editor height
+        minHeight: null,             // set minimum height of editor
+        disableDragAndDrop: false,
+        maximumImageFileSize: 1048576,
+        callbacks:{
+            onImageUpload: function(files, editor, welEditable) {
+                // upload image to server and create imgNode...
+                for (var i = files.length - 1; i >= 0; i--) {
+                    sendFile(files[i], editor, welEditable);
+                }
+            }
+        },
+        placeholder: 'Här beskriver du jobbets uppgifter, vad som förväntas av den jobbsökande, och kanske en kort företagsbeskrivning.',
+        fontNames: ['Arial', 'Arial Black', 'Courier New', 'Helvetica', 'Impact', 'Roboto', 'Tahoma', 'Times New Roman', 'Verdana'],
+        fontNamesIgnoreCheck: ['Roboto'],
+        toolbar: [
+            // [groupName, [list of button]]
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['fontsize', ['fontsize']],
+            ['fontname', ['fontname']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph', 'height']],
+            ['insert', ['hr', 'link', 'picture', 'video']],
+            ['misc', ['undo', 'redo', 'codeview']]
+        ]
+    });
+
     //$('.modal').on('show.bs.modal', function () {
     //    var scrollTop = $(window).scrollTop();
     //    $(this).css({'top' : scrollTop + 50 +  'px'});

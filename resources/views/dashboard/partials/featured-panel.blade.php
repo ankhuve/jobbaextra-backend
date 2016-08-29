@@ -17,7 +17,7 @@
         </div>
         <div class="form-group" id="featured-date-picker" {{ $company->isFeatured() ? "" : "style=display:none;" }}>
             <label for="featured-end" aria-label="...">Betalande kund till och med</label>
-            {!! Form::date('featured-end', $company->isFeatured() ? \Carbon\Carbon::parse($company->featured()->first()->end_date)->toDateString() : \Carbon\Carbon::now()) !!}
+            {!! Form::date('featured-end', $company->isFeatured() ? \Carbon\Carbon::parse($company->featured()->end_date)->toDateString() : \Carbon\Carbon::now()) !!}
         </div>
         <div class="form-group">
             <button data-submit type="submit" class="btn btn-primary btn-submit">Spara</button>
