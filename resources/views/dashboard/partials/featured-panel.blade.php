@@ -5,6 +5,7 @@
 
     <div class="panel-body">
         <p class="is-active">Företaget är en attraktiv arbetsgivare.</p>
+        <p class="is-active"><a id="edit-featured-link" href="{{ route('editFeatured', $company->id) }}">{{ $company->isFeatured() && $company->featured()->hasPresentation() ? 'Ändra' : 'Skapa' }} presentation</a></p>
         <p class="not-active">Företaget är inte en attraktiv arbetsgivare.</p>
         <hr>
         <p class="not-active">Vill du registrera företaget som attraktiv arbetsgivare kan du klicka i rutan nedan, välja ett datum och trycka på spara.</p>

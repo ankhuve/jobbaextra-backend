@@ -23,7 +23,7 @@ Route::get('/', 'DashboardController@index')->name('home');
 Route::get('/jobs', 'JobsController@index')->name('jobs');
 Route::post('/changeJobOwner', 'JobsController@changeJobOwner');
 Route::get('/featured', 'FeaturedController@all')->name('featured');
-Route::get('/featured/{id}', 'FeaturedController@edit')->name('editFeatured');
+Route::get('/featured/{companyId}', 'FeaturedController@edit')->name('editFeatured');
 Route::post('/featured/{id}', 'FeaturedController@save');
 Route::post('/featured/{id}/upload', 'FeaturedController@uploadImage');
 

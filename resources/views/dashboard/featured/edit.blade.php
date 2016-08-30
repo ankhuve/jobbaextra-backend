@@ -2,7 +2,7 @@
 
 @section('dashboard')
 
-    <h2 class="sub-header">Skapa/ändra företagspresentation</h2>
+    <h2 class="sub-header">Skapa/ändra företagspresentation <h4 class="help-block">{{ $featured->company->name }}</h4></h2>
 
     @if (session('status'))
         <div class="alert alert-success">

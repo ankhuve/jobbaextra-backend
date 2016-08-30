@@ -42,7 +42,7 @@ class FeaturedController extends Controller
 
     /**
      *
-     * Edit a featured company's description.
+     * Show page to edit a featured company's description.
      *
      * @param $companyId
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

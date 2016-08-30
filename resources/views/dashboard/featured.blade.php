@@ -3,6 +3,13 @@
 @section('dashboard')
 
     <h2 class="sub-header">Attraktiva arbetsgivare</h2>
+    <div class="bs-callout bs-callout-info">
+        <p>Här ser du alla attraktiva arbetsgivare.
+            <br>
+            En attraktiv arbetsgivare syns endast på Jobbrek.se om det har skapats en presentation för företaget.
+        </p>
+        <p>För att skapa en presentation för ett företag klickar du på namnet.</p>
+    </div>
 
     <div class="table-responsive">
         <table class="table table-striped">

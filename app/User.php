@@ -113,6 +113,25 @@ class User extends Authenticatable
         return false;
     }
 
+    /**
+     *
+     * Check if company previously has been featured.
+     *
+     * @return bool
+     */
+    public function hasBeenFeatured()
+    {
+        $isFeatured = FeaturedCompany::where([
+            ['company_id', '=', $this->id],
+            ['end_date', '<', \Carbon\Carbon::now()],
+        ])->get();
+        if(!$isFeatured->isEmpty())
+        {
+            return true;
+        };
+        return false;
+    }
+
 
     /**
      *
