@@ -86,7 +86,7 @@ class User extends Authenticatable
      */
     public function isPaying()
     {
-        if($this->paying)
+        if($this->paying && $this->paid_until > \Carbon\Carbon::now())
         {
             return true;
         }
@@ -102,7 +102,29 @@ class User extends Authenticatable
      */
     public function isFeatured()
     {
-        $isFeatured = FeaturedCompany::where('company_id', $this->id)->get();
+        $isFeatured = FeaturedCompany::where([
+            ['company_id', '=', $this->id],
+            ['end_date', '>', \Carbon\Carbon::now()],
+        ])->get();
+        if(!$isFeatured->isEmpty())
+        {
+            return true;
+        };
+        return false;
+    }
+
+    /**
+     *
+     * Check if company previously has been featured.
+     *
+     * @return bool
+     */
+    public function hasBeenFeatured()
+    {
+        $isFeatured = FeaturedCompany::where([
+            ['company_id', '=', $this->id],
+            ['end_date', '<', \Carbon\Carbon::now()],
+        ])->get();
         if(!$isFeatured->isEmpty())
         {
             return true;
@@ -123,7 +145,7 @@ class User extends Authenticatable
 //        return $this->hasOne('App\FeaturedCompany');
         if($this->isFeatured())
         {
-            $featuredObj = FeaturedCompany::where('company_id', $this->id);
+            $featuredObj = FeaturedCompany::where('company_id', $this->id)->first();
             return $featuredObj;
         }
         return false;

@@ -17,6 +17,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('featured') }}">
+                            Attraktiva arbetsgivare
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('register') }}">
                             Registrera nytt företag
                         </a>

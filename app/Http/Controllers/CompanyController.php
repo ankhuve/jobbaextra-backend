@@ -48,7 +48,6 @@ class CompanyController extends Controller
 //            $company->paid_until = Carbon::now()->toDateString();
             $company->paid_until = '0000-00-00';
             $updateMsg = 'Företaget är inte längre registrerat som betalande!';
-
         }
 
         $company->save(); // persist changes to company
@@ -72,8 +71,9 @@ class CompanyController extends Controller
         $featuredInRequest = request('featured');
         $company = User::find($companyId);
         $featured = $company->featured();
+        $hasBeenFeatured = $company->hasBeenFeatured();
 
-        if(!$featured && $featuredInRequest)
+        if(!$featured && $featuredInRequest && !$hasBeenFeatured)
         {
             $newFeatured = FeaturedCompany::create([
                 'company_id' => $companyId,
@@ -82,13 +82,30 @@ class CompanyController extends Controller
             ]);
             $updateMsg = 'Företaget är nu registrerat som en attraktiv arbetsgivare!';
             $newFeatured->save();
+            $featuredId = $newFeatured->id;
 
         } elseif($featured && !$featuredInRequest){
-            $featured->delete();
+//            $featured->delete();
             $featured->end_date = Carbon::now()->toDateString();
+            $featured->save();
+            $featuredId = $featured->id;
             $updateMsg = 'Företaget är inte längre registrerat som en attraktiv arbetsgivare!';
 
-        } else{
+        } elseif($hasBeenFeatured && $featuredInRequest) {
+            $prevFeatured = FeaturedCompany::where('company_id', $companyId)->first();
+            $prevFeatured->end_date = request('featured-end');
+            $prevFeatured->save();
+            $featuredId = $prevFeatured->id;
+            $updateMsg = 'Företaget är nu en attraktiv arbetsgivare igen!';
+        } elseif($featured && $featuredInRequest) {
+            $featured->end_date = request('featured-end');
+            $featured->save();
+
+            request('featured-end') > Carbon::now() ? $featuredInRequest = 'on' : $featuredInRequest = 0;
+
+            $featuredId = $featured->id;
+            $updateMsg = 'Företaget har uppdaterats.';
+        } else {
             $updateMsg = 'Företaget har inte uppdaterats.';
         }
 
@@ -96,14 +113,27 @@ class CompanyController extends Controller
             'status' => 'success',
             'featured' => $featuredInRequest,
             'msg' => $updateMsg,
-            'request' => request()->all()
+            'request' => request()->all(),
         );
+
+        if(isset($featuredId)){
+            $response['id'] = $featuredId;
+        }
 
         return response()->json($response);
 //        return back()->with('updated', $updateMsg);
 
     }
 
+
+    /**
+     *
+     * Handle a logo upload request.
+     *
+     * @param $companyId
+     * @param StoreCompanyLogo $request
+     * @return \Illuminate\Http\JsonResponse|string
+     */
     public function setLogo($companyId, StoreCompanyLogo $request)
     {
 //        $allFiles = Storage::disk('public')->files('/logos');

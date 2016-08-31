@@ -12,7 +12,7 @@
 
         {{ Form::open(['data-remote', 'method' => 'POST', 'url' => $company->id . '/setPaying', 'data-target' => 'paying']) }}
         <div class="form-group">
-            {!! Form::checkbox('paying', null, $company->paying, ['data-date-toggle' => 'paying']) !!}
+            {!! Form::checkbox('paying', null, $company->isPaying(), ['data-date-toggle' => 'paying']) !!}
             <label for="paying">Betalande kund</label>
         </div>
         <div class="form-group" id="paying-date-picker" {{ $company->isPaying() ? "" : "style=display:none;" }}>

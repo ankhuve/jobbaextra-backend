@@ -22,7 +22,10 @@ Route::group(['middleware' => ['auth']], function () {
 Route::get('/', 'DashboardController@index')->name('home');
 Route::get('/jobs', 'JobsController@index')->name('jobs');
 Route::post('/changeJobOwner', 'JobsController@changeJobOwner');
-//Route::get('/featured', 'DashboardController@featured')->name('featured');
+Route::get('/featured', 'FeaturedController@all')->name('featured');
+Route::get('/featured/{companyId}', 'FeaturedController@edit')->name('editFeatured');
+Route::post('/featured/{id}', 'FeaturedController@save');
+Route::post('/featured/{id}/upload', 'FeaturedController@uploadImage');
 
 Route::get('/{company}', 'DashboardController@company')->name('company');
 Route::post('/{company}/setPaying', 'CompanyController@setPaying');

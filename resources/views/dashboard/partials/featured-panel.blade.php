@@ -5,6 +5,7 @@
 
     <div class="panel-body">
         <p class="is-active">Företaget är en attraktiv arbetsgivare.</p>
+        <p class="is-active"><a id="edit-featured-link" href="{{ route('editFeatured', $company->id) }}">{{ $company->isFeatured() && $company->featured()->hasPresentation() ? 'Ändra' : 'Skapa' }} presentation</a></p>
         <p class="not-active">Företaget är inte en attraktiv arbetsgivare.</p>
         <hr>
         <p class="not-active">Vill du registrera företaget som attraktiv arbetsgivare kan du klicka i rutan nedan, välja ett datum och trycka på spara.</p>
@@ -17,7 +18,7 @@
         </div>
         <div class="form-group" id="featured-date-picker" {{ $company->isFeatured() ? "" : "style=display:none;" }}>
             <label for="featured-end" aria-label="...">Betalande kund till och med</label>
-            {!! Form::date('featured-end', $company->isFeatured() ? \Carbon\Carbon::parse($company->featured()->first()->end_date)->toDateString() : \Carbon\Carbon::now()) !!}
+            {!! Form::date('featured-end', $company->isFeatured() ? \Carbon\Carbon::parse($company->featured()->end_date)->toDateString() : \Carbon\Carbon::now()) !!}
         </div>
         <div class="form-group">
             <button data-submit type="submit" class="btn btn-primary btn-submit">Spara</button>
