@@ -17,9 +17,9 @@
                     <div class="panel-heading">
                         <h3 class="panel-title">
                             <a href="{{ route('editPage', $page->id) }}">{{ $page->title }}</a>
-                            <a data-confirm="delete" class="pull-right" href="{{ action('PagesController@delete', ['pageId' => $page->id]) }}">
-                                <i class="fa fa-times btn-delete"></i>
-                            </a>
+                            {{--<a data-confirm="delete" class="pull-right" href="{{ action('PagesController@delete', ['pageId' => $page->id]) }}">--}}
+                                {{--<i class="fa fa-times btn-delete"></i>--}}
+                            {{--</a>--}}
                         </h3>
                     </div>
                 </div>
@@ -31,11 +31,11 @@
         </div>
     @endif
 
-    <div class="col-xs-12">
-        <button class="btn btn-primary" data-toggle="new-page-form" data-target="new-page-form">
-            <i class="fa fa-plus"></i>
-        </button>
-    </div>
+    {{--<div class="col-xs-12">--}}
+        {{--<button class="btn btn-primary" data-toggle="new-page-form" data-target="new-page-form">--}}
+            {{--<i class="fa fa-plus"></i>--}}
+        {{--</button>--}}
+    {{--</div>--}}
 
     {{ Form::model('Page', ['action' => 'PagesController@create']) }}
     <div class="row m-t-2">
