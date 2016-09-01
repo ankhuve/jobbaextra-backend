@@ -26,17 +26,6 @@ class Job extends Model
         'external_link',
     ];
 
-    /**
-     * Open a new Job
-     *
-     * @param array $data
-     * @return static
-     */
-    public static function open(array $data = [])
-    {
-        return new static($data);
-    }
-
     public function user()
     {
         return $this->belongsTo('App\User');
