@@ -6,10 +6,12 @@ use App\FeaturedCompany;
 use App\Http\Requests\UpdateJobRequest;
 use App\Job;
 use App\User;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 use Laravel\View;
 
 class DashboardController extends Controller
@@ -58,7 +60,7 @@ class DashboardController extends Controller
     }
 
 
-    public function editJob($companyId, $jobId)
+    public function editJob($companyId, $jobId = null)
     {
 //        $counties = [
 //            '10' => 'Blekinge län',
@@ -102,16 +104,21 @@ class DashboardController extends Controller
         }
 
         $company = User::find($companyId);
-        $job = Job::find($jobId);
-        return view('dashboard.company.edit', compact('company', 'job', 'allFilters'));
+        if($jobId){
+            $job = Job::find($jobId);
+            return view('dashboard.company.edit', compact('company', 'job', 'allFilters'));
+        } else{
+            return view('dashboard.company.create', compact('company', 'allFilters'));
+        }
     }
 
-    public function saveJob($companyId, $jobId, UpdateJobRequest $request)
+    public function saveJob($companyId, $jobId = null, UpdateJobRequest $request)
     {
-        $job = Job::find($jobId);
-
-        $parameters = $request->all();
-//        dd($parameters);
+        if($jobId){
+            $job = Job::find($jobId);
+        } else{
+            $job = Job::create();
+        }
 
         $job->title = $request['title'];
         $job->work_place = $request['work_place'];
@@ -128,6 +135,33 @@ class DashboardController extends Controller
         $request->session()->flash('status', 'Uppdaterat!');
 
         return($this->editJob($companyId, $jobId));
+
+//        return view('dashboard.company.edit', compact('company', 'job'));
+    }
+
+    public function saveNewJob($companyId, UpdateJobRequest $request)
+    {
+        $company = User::find($companyId);
+
+        $job = $company->jobs()->create([
+            'title' => $request['title'],
+            'work_place' => $request['work_place'],
+            'type' => $request['type'],
+            'county' => $request['county'],
+            'municipality' => $request['municipality'],
+            'description' => nl2br($request['description']),
+            'latest_application_date' => $request['latest_application_date'],
+            'contact_email' => $request['contact_email'],
+            'external_link' => $request['external_link'],
+        ]);
+
+        $job->published_at = Carbon::now();
+
+        $job->save();
+
+        $request->session()->flash('status', 'Sparat! Du kan nu skapa ett nytt jobb om du vill.');
+
+        return back();
 
 //        return view('dashboard.company.edit', compact('company', 'job'));
     }

@@ -15,11 +15,10 @@
         {{ Form::open() }}
         <div class="panel panel-default">
             <div class="panel-heading">
+                <h3 class="panel-title form-group-lg">
+                    <label for="title">Jobbtitel</label>
 
-                <h3 class="panel-title form-inline">
-                    <label for="work_place">Arbetsplats</label>
-
-                    {{ Form::text('work_place', $job->work_place, ['class' => 'form-control']) }}
+                    {{ Form::text('title', $job->title, ['class' => 'form-control', 'required']) }}
                 </h3>
             </div>
             <div class="panel-body">
@@ -35,10 +34,9 @@
                     @endif
 
                     <div class="form-group col-lg-6">
-                        <label for="title">Jobbtitel</label>
+                        <label for="work_place">Arbetsplats</label>
 
-                        {{ Form::text('title', $job->title, ['class' => 'form-control']) }}
-
+                        {{ Form::text('work_place', $job->work_place, ['class' => 'form-control']) }}
                     </div>
 
                 </div>
@@ -49,21 +47,21 @@
                 </div>
                 <div class="row">
 
-                    <div class="form-group col-lg-3">
+                    <div class="form-group col-lg-4">
                         <label for="latest_application_date">Sista ansökan</label>
                         {!! Form::date('latest_application_date', $job->latest_application_date, ['class' => 'form-control']) !!}
                     </div>
-                    <div class="form-group col-lg-3">
-                        <label for="published_at">Publicerad</label>
-                        {!! Form::date('published_at', Carbon\Carbon::parse($job->published_at), ['class' => 'form-control']) !!}
-                    </div>
+                    {{--<div class="form-group col-lg-3">--}}
+                        {{--<label for="published_at">Publicerad</label>--}}
+                        {{--{!! Form::date('published_at', Carbon\Carbon::parse($job->published_at), ['class' => 'form-control']) !!}--}}
+                    {{--</div>--}}
 
                     {{--{{ dd($allFilters['lan']) }}--}}
 
                     @if (!empty($allFilters))
                         {{--{{ dd($allFilters) }}--}}
                         @if(array_key_exists('lan', $allFilters))
-                            <div class="form-group col-lg-3">
+                            <div class="form-group col-lg-4">
                                 <label for="county">Län</label>
                                 <select name="county" class="form-control">
                                     <option value=''>Välj ett län..</option>
@@ -80,7 +78,7 @@
                         @endif
                     @endif
 
-                    <div class="form-group col-lg-3">
+                    <div class="form-group col-lg-4">
                         <label for="municipality">Kommun</label>
                         {{ Form::text('municipality', $job->municipality, ['class' => 'form-control']) }}
                     </div>

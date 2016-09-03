@@ -67,5 +67,8 @@
             <p>Företaget har inte skapat några jobbannonser.</p>
         </div>
     @endif
+    <a href="{{ route('createJob', $company->id) }}">
+        <button class="btn btn-primary"><i class="fa fa-plus"></i>&nbsp;&nbsp;Skapa ny jobbannons</button>
+    </a>
 
 @endsection

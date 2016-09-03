@@ -40,5 +40,7 @@ Route::post('/{company}/setPaying', 'CompanyController@setPaying');
 Route::post('/{company}/setFeatured', 'CompanyController@setFeatured');
 Route::post('/{company}/setLogo', 'CompanyController@setLogo');
 Route::get('/{company}/delete/{jobId}', 'CompanyController@delete');
+Route::get('/{company}/create', 'DashboardController@editJob')->name('createJob');
+Route::post('/{company}/create', 'DashboardController@saveNewJob')->name('saveNewJob');
 Route::get('/{company}/edit/{id}', 'DashboardController@editJob');
 Route::post('/{company}/edit/{id}', 'DashboardController@saveJob');
