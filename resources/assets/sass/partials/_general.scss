@@ -102,6 +102,10 @@ table{
     }
 }
 
+.btn-delete{
+    color: #bb1b23;
+}
+
 
 .flash-message {
     position: fixed;
@@ -141,5 +145,9 @@ table{
 }
 
 .error{
+    display: none;
+}
+
+.toggle-hide{
     display: none;
 }

@@ -192,6 +192,11 @@ function sendFile(file) {
     });
 }
 
+var toggleElement = function toggleElement() {
+    console.log('#' + $(this).data('target'));
+    $('#' + $(this).data('target')).toggle(250);
+};
+
 $.subscribe('form.submitted', function (e) {
     $('.flash-message').fadeIn(500).delay(1500).fadeOut(500);
 });
@@ -200,8 +205,9 @@ $.subscribe('form.submitted', function (e) {
 $('form[data-remote]').on('submit', submitAjaxRequest);
 $('form input[data-date-toggle]').on('click', toggleDatePicker);
 $('[data-toggle=modal]').on('click', setCurrentOwnerInSelect);
+$('[data-toggle]').on('click', toggleElement);
 $('[data-confirm]').on('click', function (e) {
-    if (!confirm('Är du säker på att du vill ta bort jobbannonsen? Detta går inte att ångra.')) e.preventDefault();
+    if (!confirm('Är du säker på att du vill ta bort detta? Detta går inte att ångra.')) e.preventDefault();
 });
 
 $(document).on('ready', function () {
