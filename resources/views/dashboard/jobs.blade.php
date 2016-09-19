@@ -61,7 +61,7 @@
 
                     @foreach($jobs as $job)
                         <tr>
-                            <td><a target="_blank" href="{{ env('URL_FRONT', 'http://localhost:3000') }}/job/{{ $job->id }}/{{ str_slug($job->title) }}"><i class="fa fa-external-link"></i>{{ $job->title }}</a></td>
+                            <td><a target="_blank" href="{{ env('URL_FRONT', 'http://localhost:3000') }}/jobb/{{ $job->id }}/{{ str_slug($job->title) }}"><i class="fa fa-external-link"></i>{{ $job->title }}</a></td>
                             <td>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#jobOwnerModal" data-current-owner="{{ $job->user->id }}" data-job-id="{{ $job->id }}">
                                     {{ $job->user->name }}
