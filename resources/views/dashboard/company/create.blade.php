@@ -66,7 +66,7 @@
                                 <label for="county">Län</label>
                                 <select name="county" class="form-control" required>
                                     <option value=''>Välj ett län..</option>
-                                    <option value='Norge'>Norge</option>
+                                    <option value='155'>Norge</option>
                                     <option value='' disabled>--------</option>
 
                                     @foreach($allFilters['lan'] as $key => $option)

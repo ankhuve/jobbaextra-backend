@@ -65,7 +65,7 @@
                                 <label for="county">Län</label>
                                 <select name="county" class="form-control">
                                     <option value=''>Välj ett län..</option>
-                                    <option value='Norge' {{ $job->county === 'Norge' ? 'selected' : '' }}>Norge</option>
+                                    <option value='155' {{ $job->county === 'Norge' || $job->county === '155' ? 'selected' : '' }}>Norge</option>
                                     <option value='' disabled>--------</option>
 
                                     @foreach($allFilters['lan'] as $key => $option)
