@@ -25,10 +25,10 @@
 
                 <div class="row">
                     @if (!empty($allFilters))
-                        @if(array_key_exists('yrkesomraden', $allFilters))
+                        @if(array_key_exists('yrkesgrupper', $allFilters))
                             <div class="form-group col-lg-6">
                                 <label for="type">Yrkesområde</label>
-                                {{ Form::select('type', $allFilters['yrkesomraden'], $job->type, ['class' => 'form-control', 'placeholder' => 'Välj ett yrkesområde..']) }}
+                                {{ Form::select('type', $allFilters['yrkesgrupper'], $job->type, ['class' => 'form-control', 'placeholder' => 'Välj ett yrkesområde..']) }}
                             </div>
                         @endif
                     @endif
