@@ -104,7 +104,7 @@ class User extends Authenticatable
     {
         $isFeatured = FeaturedCompany::where([
             ['company_id', '=', $this->id],
-            ['end_date', '>', \Carbon\Carbon::now()],
+            ['end_date', '>=', \Carbon\Carbon::now()],
         ])->get();
         if(!$isFeatured->isEmpty())
         {
