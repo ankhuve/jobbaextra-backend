@@ -37,11 +37,11 @@
                     <thead>
                     <tr>
                         <th>Titel</th>
-                        <th>Yrkesområde</th>
                         <th>Kontakt</th>
                         <th>Kommun</th>
                         <th>Publiceringsdatum</th>
                         <th>Sista ansökan</th>
+                        <th class="text-danger">Radera</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -49,7 +49,6 @@
                     @foreach($jobs as $job)
                         <tr>
                             <td><a href="{{ URL::current() }}/edit/{{ $job->id }}">{{ $job->title }}</a></td>
-                            <td>{{ $job->type }}</td>
                             <td>{{ $job->contact_email }}</td>
                             <td>{{ $job->municipality }}</td>
                             <td>{{ $job->published_at }}</td>
