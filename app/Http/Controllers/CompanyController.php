@@ -86,7 +86,7 @@ class CompanyController extends Controller
 
         } elseif($featured && !$featuredInRequest){
 //            $featured->delete();
-            $featured->end_date = Carbon::now()->toDateString();
+            $featured->end_date = Carbon::yesterday()->toDateString();
             $featured->save();
             $featuredId = $featured->id;
             $updateMsg = 'Företaget är inte längre registrerat som en attraktiv arbetsgivare!';
