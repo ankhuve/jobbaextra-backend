@@ -4,6 +4,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
+                <div >
+                    <img class="img img-responsive img-rounded m-b-2" src="{{ asset('img/jobbiskola_logo_small_bg.png') }}" alt="Jobbiskola">
+                </div>
                 <ul class="nav nav-sidebar">
                     <li class="{{ Route::currentRouteName() === 'home' ? 'active' : '' }}">
                         <a href="{{ route('home') }}">
@@ -11,17 +14,17 @@
                             {!! Route::currentRouteName() === 'home' ? '<span class="sr-only">(current)</span>' : '' !!}
                         </a>
                     </li>
-                    <li>
+                    <li class="{{ Route::currentRouteName() === 'jobs' ? 'active' : '' }}">
                         <a href="{{ route('jobs') }}">
                             Alla jobb
                         </a>
                     </li>
-                    <li>
+                    <li class="{{ Route::currentRouteName() === 'featured' ? 'active' : '' }}">
                         <a href="{{ route('featured') }}">
                             Attraktiva arbetsgivare
                         </a>
                     </li>
-                    <li>
+                    <li class="{{ Route::currentRouteName() === 'pages' ? 'active' : '' }}">
                         <a href="{{ route('pages') }}">
                             Sidinnehåll
                         </a>
