@@ -13,8 +13,8 @@ class AddColumnsPaidUntilAndLastPaidToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->timestamp('paid_until');
-            $table->timestamp('last_paid');
+            $table->timestamp('paid_until')->nullable();
+            $table->timestamp('last_paid')->nullable();
         });
     }
 
