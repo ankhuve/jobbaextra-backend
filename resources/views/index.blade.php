@@ -30,6 +30,11 @@
                         </a>
                     </li>
                     <li>
+                        <a href="{{ route('users') }}">
+                            Användare
+                        </a>
+                    </li>
+                    <li>
                         <a href="{{ route('register') }}">
                             Registrera nytt företag
                         </a>
