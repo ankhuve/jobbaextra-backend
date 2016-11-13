@@ -29,7 +29,7 @@
                             Sidinnehåll
                         </a>
                     </li>
-                    <li>
+                    <li class="{{ Route::currentRouteName() === 'users' ? 'active' : '' }}">
                         <a href="{{ route('users') }}">
                             Användare
                         </a>
