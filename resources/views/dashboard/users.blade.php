@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                             @if($user->hasCV())
-                                <a class="center-block" href="{{ $user->getCVLink() }}" download>
+                                <a class="center-block" href="{{ action('DashboardController@download', $user->id) }}">
                                     <button class="btn btn-primary m-t-1">
                                         <i class="fa fa-file" aria-hidden="true"></i> Hämta CV
                                     </button>

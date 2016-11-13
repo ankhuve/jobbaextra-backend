@@ -12,7 +12,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Laravel\View;
+use Illuminate\Support\Facades\Response;
 
 class DashboardController extends Controller
 {
@@ -87,6 +89,46 @@ class DashboardController extends Controller
         }
 
         return view('dashboard.users', compact('users', 'allFilters'));
+    }
+
+    /**
+     * Download a user's CV if the user has uploaded one.
+     *
+     * @param $userId
+     * @return bool
+     */
+    public function download($userId)
+    {
+        $user = User::find($userId);
+        $pathToCVFolder = 'user-cvs/';
+        $disk = Storage::disk('s3');
+        $fileName = $user->cv_path;
+        $path = $pathToCVFolder . $fileName;
+
+        // if the file exists
+        if($disk->exists($path)){
+            $file =  $disk->readStream($path);
+
+            // returns array of metadata for the file
+            $metadata =  $disk->getDriver()->getMetadata($path);
+
+            // returns mimetype
+            $mimetype =  $metadata['mimetype'];
+
+            // returns filesize
+            $size =  $metadata['size'];
+
+            return Response::stream(function() use($file) {
+                fpassthru($file);
+            }, 200, [
+                "Content-Type" => $mimetype,
+                "Content-Length" => $size,
+                "Content-disposition" => "attachment; filename=\"" .basename($path) . "\"",
+            ]);
+
+        } else{
+            return false;
+        }
     }
 
 

@@ -101,33 +101,6 @@ class User extends Authenticatable
 
     /**
      *
-     * Get the user's uploaded CV if the user has one.
-     *
-     * @return bool
-     */
-    public function getCVLink()
-    {
-        if($this->hasCV())
-        {
-            $pathToCVFolder = 'user-cvs/';
-            $disk = Storage::disk('s3');
-            $fileName = $this->cv_path;
-
-            // if the file exists
-            if($disk->exists($pathToCVFolder . $fileName)){
-                $url = $disk->url($pathToCVFolder . $fileName);
-                return $url;
-            } else{
-                return false;
-            }
-        }
-        return false;
-    }
-
-
-
-    /**
-     *
      * Check if company is paying.
      *
      * @return bool

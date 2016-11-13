@@ -36,6 +36,7 @@ Route::get('/pages/{id}', 'PagesController@edit')->name('editPage');
 Route::post('/editBlock/{blockId}', 'PagesController@saveBlock');
 
 Route::get('/users', 'DashboardController@users')->name('users');
+Route::get('/users/{userID}/download', 'DashboardController@download');
 
 Route::get('/{company}', 'DashboardController@company')->name('company');
 Route::post('/{company}/setPaying', 'CompanyController@setPaying');
