@@ -255,28 +255,14 @@ class DashboardController extends Controller
         array_push($searchOptions, $results);
 
         // yrkesområden
-//        $results = $client->get('platsannonser/soklista/yrkesomraden', [
-//            'headers' => [
-//                'Accept'          => 'application/json',
-//                'Accept-Language' => 'sv-se,sv'
-//            ]
-//        ])->getBody()->getContents();
-
-        // vi låser oss till jobb inom vård
-        $searchParams = ['yrkesomradeid' => 8];
-
-        // hämta alla yrkesgrupper inom pedagogiska jobb
-        $results = $client->get('platsannonser/soklista/yrkesgrupper', [
-            'query' => $searchParams,
+        $results = $client->get('platsannonser/soklista/yrkesomraden', [
             'headers' => [
                 'Accept'          => 'application/json',
                 'Accept-Language' => 'sv-se,sv'
             ]
         ])->getBody()->getContents();
-
         $results = json_decode($results);
         array_push($searchOptions, $results);
-
         return $searchOptions;
     }
 }

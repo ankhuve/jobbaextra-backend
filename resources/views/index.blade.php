@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <a href="{{ env('URL_FRONT', 'www.vardvakanser.se') }}" target="_blank">
-                    <img class="img img-responsive img-rounded m-b-2" src="{{ asset('img/logo_small_bg.png') }}" alt="{{ config('app.name', 'Vårdvakanser') }}">
+                    <img class="img img-responsive img-rounded m-b-2" src="{{ asset('img/logo_small_bg.png') }}" alt="{{ env('APP_NAME', 'Vårdvakanser') }}">
                 </a>
                 <ul class="nav nav-sidebar">
                     <li class="{{ Route::currentRouteName() === 'home' ? 'active' : '' }}">
