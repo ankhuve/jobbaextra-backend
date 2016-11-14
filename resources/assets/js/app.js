@@ -206,8 +206,21 @@ function sendFile(file) {
 }
 
 var toggleElement = function(){
-    console.log('#' + $(this).data('target'));
-    $('#' + $(this).data('target')).toggle(250);
+
+    var hide = $(this).data('toggle-hide');
+    var target = $(this).data('target');
+
+    // attributet data-toggle-hide kommer att dölja alla sådana element
+    if(hide){
+        var $toBeHidden = $(hide);
+        $toBeHidden.each(function(i, el){
+            if(el.id != target){
+                // detta gör att vi kan stänga rutan om vi klickar på samma namn igen
+                $(el).hide(250);
+            }
+        });
+    }
+    $('#' + target).toggle(250);
 };
 
 $.subscribe('form.submitted', function(e){
