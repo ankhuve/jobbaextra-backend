@@ -5970,4 +5970,12 @@ table .fa-external-link {
 .m-b-2 {
   margin-bottom: 2rem; }
 
+table tr.interactive {
+  cursor: pointer; }
+  table tr.interactive:hover {
+    background: #cfe7ee; }
+
+.text-strong {
+  font-weight: 700; }
+
 /*# sourceMappingURL=app.css.map */

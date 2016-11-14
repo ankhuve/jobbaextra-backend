@@ -13,7 +13,7 @@ class AddColumnLogoPathToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('logo_path');
+            $table->string('logo_path')->nullable();
         });
     }
 
