@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Storage;
+
 class User extends Authenticatable
 {
     /**
@@ -21,6 +23,10 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password', 'remember_token',
+    ];
+
+    protected $casts = [
+        'categories' => 'array',
     ];
 
     /**
@@ -71,6 +77,21 @@ class User extends Authenticatable
     public function hasLogo()
     {
         if($this->logo_path)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     *
+     * Check if user has an uploaded CV.
+     *
+     * @return bool
+     */
+    public function hasCV()
+    {
+        if($this->cv_path)
         {
             return true;
         }

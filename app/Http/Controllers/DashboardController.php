@@ -12,7 +12,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Laravel\View;
+use Illuminate\Support\Facades\Response;
 
 class DashboardController extends Controller
 {
@@ -33,7 +35,7 @@ class DashboardController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Http\Response
+     * @return View
      */
     public function index()
     {
@@ -57,6 +59,76 @@ class DashboardController extends Controller
         $company = User::find($companyId);
 
         return view('dashboard.company', compact('jobs', 'company'));
+    }
+
+
+    public function users()
+    {
+        $users = User::where([
+            ['role', '=', '1'],
+//            ['cv_path', '!=', 'null'],
+        ])
+            ->orderBy('cv_path', 'desc')
+            ->paginate(25); // paginate the users
+//            ->get(); // only get users registered as users
+
+        $filters = $this->getApiFiltersArray();
+
+        $allFilters = [];
+
+        if(!empty($filters)){
+            foreach ($filters as $filter) {
+                $filterArray = [];
+                $options = $filter->soklista->sokdata;
+                $filterName = $filter->soklista->listnamn;
+                foreach ($options as $option) {
+                    $filterArray[$option->id] = $option->namn;
+                }
+                $allFilters[$filterName] = $filterArray;
+            }
+        }
+
+        return view('dashboard.users', compact('users', 'allFilters'));
+    }
+
+    /**
+     * Download a user's CV if the user has uploaded one.
+     *
+     * @param $userId
+     * @return bool
+     */
+    public function download($userId)
+    {
+        $user = User::find($userId);
+        $pathToCVFolder = 'user-cvs/';
+        $disk = Storage::disk('s3');
+        $fileName = $user->cv_path;
+        $path = $pathToCVFolder . $fileName;
+
+        // if the file exists
+        if($disk->exists($path)){
+            $file =  $disk->readStream($path);
+
+            // returns array of metadata for the file
+            $metadata =  $disk->getDriver()->getMetadata($path);
+
+            // returns mimetype
+            $mimetype =  $metadata['mimetype'];
+
+            // returns filesize
+            $size =  $metadata['size'];
+
+            return Response::stream(function() use($file) {
+                fpassthru($file);
+            }, 200, [
+                "Content-Type" => $mimetype,
+                "Content-Length" => $size,
+                "Content-disposition" => "attachment; filename=\"" .basename($path) . "\"",
+            ]);
+
+        } else{
+            return false;
+        }
     }
 
 

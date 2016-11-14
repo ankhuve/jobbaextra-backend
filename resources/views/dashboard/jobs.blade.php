@@ -55,6 +55,8 @@
                         <th>Kontakt</th>
                         <th>Publiceringsdatum</th>
                         <th>Sista ansökan</th>
+                        <th>Antal visningar</th>
+                        <th>Ansökningar</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -70,6 +72,8 @@
                             <td>{{ $job->contact_email }}</td>
                             <td>{{ $job->published_at }}</td>
                             <td>{{ $job->latest_application_date }}</td>
+                            <td>{{ $job->page_views }}</td>
+                            <td>{{ $job->application_clicks }}</td>
                         </tr>
                     @endforeach
 

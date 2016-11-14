@@ -29,6 +29,11 @@
                             Sidinnehåll
                         </a>
                     </li>
+                    <li class="{{ Route::currentRouteName() === 'users' ? 'active' : '' }}">
+                        <a href="{{ route('users') }}">
+                            Användare
+                        </a>
+                    </li>
                     <li>
                         <a href="{{ route('register') }}">
                             Registrera nytt företag

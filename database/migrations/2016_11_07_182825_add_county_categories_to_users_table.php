@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnsPaidUntilAndLastPaidToUsersTable extends Migration
+class AddCountyCategoriesToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnsPaidUntilAndLastPaidToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->timestamp('paid_until')->nullable();
-            $table->timestamp('last_paid')->nullable();
+            $table->integer('county')->nullable();
+            $table->string('categories')->nullable();
         });
     }
 
@@ -26,7 +26,7 @@ class AddColumnsPaidUntilAndLastPaidToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['paid_until', 'last_paid']);
+            $table->dropColumn(['county', 'categories']);
         });
     }
 }
