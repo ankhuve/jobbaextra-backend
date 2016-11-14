@@ -262,8 +262,8 @@ class DashboardController extends Controller
 //            ]
 //        ])->getBody()->getContents();
 
-        // vi låser oss till pedagogiska jobb
-        $searchParams = ['yrkesomradeid' => 15];
+        // vi låser oss till jobb inom vård
+        $searchParams = ['yrkesomradeid' => 8];
 
         // hämta alla yrkesgrupper inom pedagogiska jobb
         $results = $client->get('platsannonser/soklista/yrkesgrupper', [
