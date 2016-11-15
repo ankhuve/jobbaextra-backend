@@ -37,7 +37,7 @@
     <div class="bs-callout bs-callout-info">
         <p>
             Här listas alla jobbannonser som har skapats. Du kan ändra ägaren av en jobbannons genom att klicka på företagets namn.
-            <br>För att se en annons på Jobbrek.se kan du klicka på annonsens titel.
+            <br>För att se en annons på <a href="{{ config('app.url-front') }}">{{ config('app.name', 'Vardvakanser.se') }}</a> kan du klicka på annonsens titel.
         </p>
     </div>
 
@@ -55,6 +55,8 @@
                         <th>Kontakt</th>
                         <th>Publiceringsdatum</th>
                         <th>Sista ansökan</th>
+                        <th>Antal visningar</th>
+                        <th>Ansökningar</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -70,6 +72,8 @@
                             <td>{{ $job->contact_email }}</td>
                             <td>{{ $job->published_at }}</td>
                             <td>{{ $job->latest_application_date }}</td>
+                            <td>{{ $job->page_views }}</td>
+                            <td>{{ $job->application_clicks }}</td>
                         </tr>
                     @endforeach
 

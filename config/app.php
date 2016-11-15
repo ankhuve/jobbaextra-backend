@@ -40,6 +40,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'url-front' => env('URL_FRONT', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
