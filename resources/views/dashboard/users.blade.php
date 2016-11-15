@@ -49,10 +49,10 @@
                                     <h5 class="text-strong">Kategorier <span class="badge">{{ $user->categories ? count($user->categories) : "0" }}</span></h5>
                                 </div>
                                 <div class="col-lg-8">
-                                    @if( $user->categories && !empty($allFilters) && array_key_exists('yrkesgrupper', $allFilters))
+                                    @if( $user->categories && !empty($allFilters) && array_key_exists('yrkesomraden', $allFilters))
                                         <ul>
                                             @foreach($user->categories as $category)
-                                                <li><h5>{{ $allFilters['yrkesgrupper'][$category] }}</h5></li>
+                                                <li><h5>{{ $allFilters['yrkesomraden'][$category] }}</h5></li>
                                             @endforeach
                                         </ul>
                                     @endif
