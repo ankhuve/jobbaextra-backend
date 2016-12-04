@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Laravel\View;
 use Illuminate\Support\Facades\Response;
-use phpDocumentor\Reflection\Types\Array_;
 use stdClass;
 
 class DashboardController extends Controller
