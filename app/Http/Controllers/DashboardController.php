@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Laravel\View;
 use Illuminate\Support\Facades\Response;
+use stdClass;
 
 class DashboardController extends Controller
 {
@@ -262,7 +263,31 @@ class DashboardController extends Controller
             ]
         ])->getBody()->getContents();
         $results = json_decode($results);
+        $results->soklista->sokdata = $this->addCustomJobTypes($results->soklista->sokdata);
+
         array_push($searchOptions, $results);
         return $searchOptions;
+    }
+
+    private function addCustomJobTypes(array $afJobTypesArray)
+    {
+        $customJobTypes = array();
+
+        // Övrigt
+        $type = new stdClass();
+        $type->id = '9000';
+        $type->namn = 'Övrigt';
+        array_push($customJobTypes, $type);
+
+        // Add all the custom job types
+        foreach ($customJobTypes as $type){
+            array_push($afJobTypesArray, $type);
+        }
+
+        $afJobTypesArray = array_values(array_sort($afJobTypesArray, function ($value) {
+            return $value->namn;
+        }));
+
+        return $afJobTypesArray;
     }
 }
