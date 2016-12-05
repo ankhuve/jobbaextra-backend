@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
                 <a href="{{ env('URL_FRONT', 'www.jobbiskola.se') }}" target="_blank">
-                    <img class="img img-responsive img-rounded m-b-2" src="{{ asset('img/jobbiskola_logo_small_bg.png') }}" alt="Jobbiskola">
+                    <img class="img img-responsive img-rounded m-b-2" src="{{ asset('img/jobbiskola_logo_small_bg.png') }}" alt="{{ config('app.name', 'Jobbiskola') }}">
                 </a>
                 <ul class="nav nav-sidebar">
                     <li class="{{ Route::currentRouteName() === 'home' ? 'active' : '' }}">
