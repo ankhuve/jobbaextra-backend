@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\JobCreated;
 use App\FeaturedCompany;
 use App\Http\Requests\UpdateJobRequest;
 use App\Job;
@@ -228,11 +229,14 @@ class DashboardController extends Controller
             'external_link' => $request['external_link'],
         ]);
 
+
         $job->published_at = Carbon::now();
 
         $job->save();
 
         $request->session()->flash('status', 'Sparat! Du kan nu skapa ett nytt jobb om du vill.');
+
+        event(new JobCreated($job, $request));
 
         return back();
 
@@ -310,5 +314,4 @@ class DashboardController extends Controller
 
        return $afJobTypesArray;
     }
-
 }
