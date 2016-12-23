@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Storage;
+use SammyK\LaravelFacebookSdk\SyncableGraphNodeTrait;
 
 class User extends Authenticatable
 {
+    use SyncableGraphNodeTrait;
     /**
      * The attributes that are mass assignable.
      *
