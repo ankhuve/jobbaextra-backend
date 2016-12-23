@@ -39,10 +39,32 @@
                             Registrera nytt företag
                         </a>
                     </li>
+                    <li class="{{ Route::currentRouteName() === 'fbLogin' ? 'active' : '' }}">
+                        <a href="{{ route('fbLogin') }}">
+                            <i class="fa fa-facebook-square"></i>&nbsp;&nbsp;
+                            @if(session('fb_user_name'))
+                                {{ session('fb_user_name') }}
+                            @else
+                                Hantera Facebook
+                            @endif
+                        </a>
+                    </li>
                 </ul>
             </div>
 
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                @if (session('message'))
+                    <div class="alert alert-success">
+                        {{ session('message') }}
+                    </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 @yield('dashboard')
             </div>
 

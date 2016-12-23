@@ -19,7 +19,7 @@ class RedirectIfAuthenticated
     {
         if (Auth::guard($guard)->check())
         {
-            if (Auth::user()->role != 3)
+            if (Auth::user()->role != 3 && Auth::user()->role != 4)
             {
                 return response('Unauthorized.', 401);
             }

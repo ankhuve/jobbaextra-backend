@@ -21,6 +21,10 @@ Route::group(['middleware' => ['auth']], function () {
 
 Route::get('/', 'DashboardController@index')->name('home');
 
+Route::get('/facebook/login', 'FacebookController@index')->name('fbLogin');
+Route::get('/facebook/callback', 'FacebookController@callback')->name('fbCallback');
+Route::post('/facebook/post', 'FacebookController@post')->name('fbPost');
+
 Route::get('/jobs', 'JobsController@index')->name('jobs');
 Route::post('/changeJobOwner', 'JobsController@changeJobOwner');
 
@@ -42,7 +46,7 @@ Route::get('/{company}', 'DashboardController@company')->name('company');
 Route::post('/{company}/setPaying', 'CompanyController@setPaying');
 Route::post('/{company}/setFeatured', 'CompanyController@setFeatured');
 Route::post('/{company}/setLogo', 'CompanyController@setLogo');
-Route::get('/{company}/delete/{jobId}', 'CompanyController@delete');
+Route::get('/{company}/delete/{jobId}', 'CompanyController@delete')->middleware('role:superadmin');;
 Route::get('/{company}/create', 'DashboardController@editJob')->name('createJob');
 Route::post('/{company}/create', 'DashboardController@saveNewJob')->name('saveNewJob');
 Route::get('/{company}/edit/{id}', 'DashboardController@editJob');
