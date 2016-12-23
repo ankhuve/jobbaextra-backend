@@ -43,7 +43,9 @@
                         <th>Sista ansökan</th>
                         <th>Antal visningar</th>
                         <th>Ansökningar</th>
-                        <th class="text-danger">Radera</th>
+                        @if(Auth::user()->role === 4)
+                            <th class="text-danger">Radera</th>
+                        @endif
                     </tr>
                     </thead>
                     <tbody>
@@ -57,7 +59,9 @@
                             <td>{{ $job->latest_application_date }}</td>
                             <td>{{ $job->page_views }}</td>
                             <td>{{ $job->application_clicks }}</td>
-                            <td><a data-confirm="delete" href="{{ action('CompanyController@delete', ['jobId' => $job->id, 'company' => $company->id]) }}"><i class="fa fa-times"></i></a></td>
+                            @if(Auth::user()->role === 4)
+                                <td><a data-confirm="delete" href="{{ action('CompanyController@delete', ['jobId' => $job->id, 'company' => $company->id]) }}"><i class="fa fa-times"></i></a></td>
+                            @endif
                         </tr>
                     @endforeach
 
