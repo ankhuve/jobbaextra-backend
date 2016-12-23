@@ -35,7 +35,7 @@ class PostJobOnFacebook
 
 
         if(App::isLocal()){
-            $link = 'https://jobbiskola.se';
+            $link = 'https://' . strtolower(config('app.name')) . '.se';
         } else{
             $job = $event->job;
             $link = env('URL_FRONT') . '/jobb/' . $job->id . '/' . str_slug($job->title);
@@ -44,7 +44,7 @@ class PostJobOnFacebook
         // make the $params
         $params = array(
             "access_token" => session('fb_page_access_token'),
-            "message" => "Nytt jobb på Jobbiskola.se!",
+            "message" => "Nytt jobb på " . config('app.name') . ".se!",
             "link" => $link,
         );
 
