@@ -5839,6 +5839,10 @@ table .fa-external-link {
 .toggle-hide {
   display: none; }
 
+li.bottom {
+  position: absolute;
+  bottom: 1rem; }
+
 /*
  * Top navigation
  * Hide default border to remove 1px line.
