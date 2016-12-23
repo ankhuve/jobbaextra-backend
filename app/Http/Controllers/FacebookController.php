@@ -45,7 +45,7 @@ class FacebookController extends Controller
             }
         }
 
-        $permissions = $this->makePermissionsChecklist($page);
+        $permissions = $this->makePermissionsChecklist($currentPage);
 
         return view('auth.facebook-login', compact('login_url', 'pages', 'permissions'));
     }
