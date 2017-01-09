@@ -126,6 +126,14 @@ class CompanyController extends Controller
     }
 
 
+    public function checkOgImageSize($logo) {
+        $minHeight = 200;
+        $minWidth = 200;
+        list($width, $height) = getimagesize($logo);
+        return ( ($width >= $minWidth) && ($height >= $minHeight) );
+    }
+
+
     /**
      *
      * Handle a logo upload request.
@@ -136,6 +144,12 @@ class CompanyController extends Controller
      */
     public function setLogo($companyId, StoreCompanyLogo $request)
     {
+
+        $sizeCheck = false;
+        if($this->checkOgImageSize($request->file('logo'))){
+            $sizeCheck = true;
+        }
+
 //        $allFiles = Storage::disk('public')->files('/logos');
         $logoStorage = Storage::disk('logos');
         $company = User::find($companyId);
@@ -156,7 +170,7 @@ class CompanyController extends Controller
         $company->save();
 
         if($request->ajax())
-            return response()->json(['path' => 'uploads/' . $fileName, 'logo' => 1]);
+            return response()->json(['path' => 'uploads/' . $fileName, 'logo' => 1, 'ogImageApproved' => $sizeCheck]);
         return 'success';
     }
 
