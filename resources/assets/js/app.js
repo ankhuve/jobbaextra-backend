@@ -1,16 +1,3 @@
-//var Vue = require('vue');
-//
-//
-//var vm = new Vue({
-//    el: '#app',
-//    data: {
-//        message: 'Hello Vue.js!'
-//    }
-//});
-//
-//console.log(vm);
-//
-
 function toggleDatePicker(){
     var target = $(this).data('date-toggle');
     $('#' + target + '-date-picker').toggle(200);
@@ -30,6 +17,7 @@ function handleLogoUpload(form){
         success: function (data) {
             $('#logo-img').attr('src', data.path);
             form.find('.error').fadeOut(200);
+            ogImageDimensionsCheck(data.ogImageApproved);
             demonstrateSuccessOnButton(submitButton);
             changePanelStyle(data[target], $("#" + form.data('target') + "-panel"));
             $.publish('form.submitted', form);
@@ -102,6 +90,30 @@ var submitAjaxRequest = function(e) {
     e.preventDefault();
 };
 
+function ogImageDimensionsCheck(approved){
+    var $ogCheckApproved = $('#og-image-check-approved');
+    var $ogCheckDenied = $('#og-image-check-denied');
+    if(approved !== undefined){
+        if(approved === true){
+            $ogCheckApproved.show(200);
+            $ogCheckDenied.hide(200);
+        } else{
+            $ogCheckApproved.hide(200);
+            $ogCheckDenied.show(200);
+        }
+    } else {
+        var logo = document.getElementById('logo-img');
+
+        if ((logo.naturalWidth >= 200) && (logo.naturalHeight >= 200)) {
+            $ogCheckApproved.show(200);
+            $ogCheckDenied.hide(200);
+        } else {
+            $ogCheckApproved.hide(200);
+            $ogCheckDenied.show(200);
+        }
+    }
+}
+
 function onLoadChangePanelStyle(){
     var onCompanyPage = $('#companyPage').length;
     if(onCompanyPage){
@@ -113,6 +125,10 @@ function onLoadChangePanelStyle(){
                 isActive = $panel.find('input[name="' + panels[i] + '"]')[0].checked;
             } else{
                 isActive = $panel.find('#logo-img').attr('src') ? true : false;
+                if(isActive){
+                    // Om vi har en uppladdad logga
+                    ogImageDimensionsCheck();
+                }
             }
             if(isActive){
                 $panel.addClass('panel-success');
