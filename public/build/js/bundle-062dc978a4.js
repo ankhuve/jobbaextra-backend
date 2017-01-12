@@ -1,19 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-//var Vue = require('vue');
-//
-//
-//var vm = new Vue({
-//    el: '#app',
-//    data: {
-//        message: 'Hello Vue.js!'
-//    }
-//});
-//
-//console.log(vm);
-//
-
 function toggleDatePicker() {
     var target = $(this).data('date-toggle');
     $('#' + target + '-date-picker').toggle(200);
@@ -32,6 +19,7 @@ function handleLogoUpload(form) {
         success: function success(data) {
             $('#logo-img').attr('src', data.path);
             form.find('.error').fadeOut(200);
+            ogImageDimensionsCheck(data.ogImageApproved);
             demonstrateSuccessOnButton(submitButton);
             changePanelStyle(data[target], $("#" + form.data('target') + "-panel"));
             $.publish('form.submitted', form);
@@ -97,6 +85,30 @@ var submitAjaxRequest = function submitAjaxRequest(e) {
     e.preventDefault();
 };
 
+function ogImageDimensionsCheck(approved) {
+    var $ogCheckApproved = $('#og-image-check-approved');
+    var $ogCheckDenied = $('#og-image-check-denied');
+    if (approved !== undefined) {
+        if (approved === true) {
+            $ogCheckApproved.show(200);
+            $ogCheckDenied.hide(200);
+        } else {
+            $ogCheckApproved.hide(200);
+            $ogCheckDenied.show(200);
+        }
+    } else {
+        var logo = document.getElementById('logo-img');
+
+        if (logo.naturalWidth >= 200 && logo.naturalHeight >= 200) {
+            $ogCheckApproved.show(200);
+            $ogCheckDenied.hide(200);
+        } else {
+            $ogCheckApproved.hide(200);
+            $ogCheckDenied.show(200);
+        }
+    }
+}
+
 function onLoadChangePanelStyle() {
     var onCompanyPage = $('#companyPage').length;
     if (onCompanyPage) {
@@ -108,6 +120,10 @@ function onLoadChangePanelStyle() {
                 isActive = $panel.find('input[name="' + panels[i] + '"]')[0].checked;
             } else {
                 isActive = $panel.find('#logo-img').attr('src') ? true : false;
+                if (isActive) {
+                    // Om vi har en uppladdad logga
+                    ogImageDimensionsCheck();
+                }
             }
             if (isActive) {
                 $panel.addClass('panel-success');
