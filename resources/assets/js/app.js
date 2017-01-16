@@ -91,8 +91,8 @@ var submitAjaxRequest = function(e) {
 };
 
 function ogImageDimensionsCheck(approved){
-    var $ogCheckApproved = $('#og-image-check-approved');
-    var $ogCheckDenied = $('#og-image-check-denied');
+    let $ogCheckApproved = $('#og-image-check-approved');
+    let $ogCheckDenied = $('#og-image-check-denied');
     if(approved !== undefined){
         if(approved === true){
             $ogCheckApproved.show(200);
@@ -102,7 +102,7 @@ function ogImageDimensionsCheck(approved){
             $ogCheckDenied.show(200);
         }
     } else {
-        var logo = document.getElementById('logo-img');
+        let logo = document.getElementById('logo-img');
 
         if ((logo.naturalWidth >= 200) && (logo.naturalHeight >= 200)) {
             $ogCheckApproved.show(200);

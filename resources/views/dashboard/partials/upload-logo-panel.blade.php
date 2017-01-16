@@ -5,6 +5,7 @@
 
     <div class="panel-body">
         <p class="not-active">Företaget har ingen logga uppladdad.</p>
+        <p class="help-block">Loggan måste vara minst 200x200 pixlar stor för att användas vid delning av jobbannonser på Facebook.</p>
         <hr class="not-active">
 
         {{ Form::open(['data-remote', 'method' => 'POST', 'url' => $company->id . '/setLogo', 'files' => true, 'data-target' => 'logo']) }}
@@ -27,8 +28,8 @@
                     </p>
                 </div>
             </div>
+            <hr>
         </div>
-        <hr>
         <div class="form-group">
             <label class="is-active" for="logo">Ladda upp en ny logga</label>
             <label class="not-active" for="logo">Ladda upp logga</label>
