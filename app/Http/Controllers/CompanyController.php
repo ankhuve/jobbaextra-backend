@@ -144,16 +144,20 @@ class CompanyController extends Controller
      */
     public function setLogo($companyId, StoreCompanyLogo $request)
     {
+        $company = User::find($companyId);
 
+        // check if the uploaded logo can be used as og-image
         $sizeCheck = false;
         if($this->checkOgImageSize($request->file('logo'))){
             $sizeCheck = true;
+            $company->logo_accepted_as_og_image = true;
+            $company->save();
+        } else{
+            $company->logo_accepted_as_og_image = false;
         }
 
-//        $allFiles = Storage::disk('public')->files('/logos');
-        $logoStorage = Storage::disk('logos');
-        $company = User::find($companyId);
 
+        $logoStorage = Storage::disk('logos');
         if($company->hasLogo())
         {
             // delete old logo
