@@ -14,7 +14,7 @@
         <p>
             Här listas alla block på sidan som för tillfället är editerbara. Vill du ändra något är det bara att ändra texterna och trycka på spara.
             <br><br>
-            Glöm inte att titta på <a href="{{ config('app.url-front') }}">{{ config('app.name', 'Jobbiskola.se') }}</a> så att allt ser bra ut efter att du har sparat!
+            Glöm inte att titta på <a href="{{ config('app.url-front') }}">{{ env('APP_NAME', 'Jobbiskola.se') }}</a> så att allt ser bra ut efter att du har sparat!
         </p>
     </div>
 

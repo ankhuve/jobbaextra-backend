@@ -18,7 +18,7 @@ elixir(function(mix) {
     mix.sass('app.scss')
         .browserify(['pubsub.js', 'app.js'])
         .browserSync({
-            proxy: 'jobbaextra-back.app',
+            proxy: 'jobbadmin.app',
             port: 4000
         });
 
