@@ -252,6 +252,9 @@ $('[data-toggle]').on('click', toggleElement);
 $('[data-confirm]').on('click', function(e){
     if (!confirm('Är du säker på att du vill ta bort detta? Detta går inte att ångra.')) e.preventDefault();
 });
+$('#logo-img').on('load', function(){
+    ogImageDimensionsCheck();
+});
 
 $(document).on('ready', function(){
     $.ajaxSetup({
