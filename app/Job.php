@@ -30,4 +30,14 @@ class Job extends Model
     {
         return $this->belongsTo('App\User');
     }
+
+    /**
+     * A job may be profiled.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function jobs()
+    {
+        return $this->hasOne('App\ProfiledJob');
+    }
 }
