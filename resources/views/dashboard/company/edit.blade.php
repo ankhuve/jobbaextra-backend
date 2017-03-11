@@ -52,14 +52,11 @@
                         {!! Form::date('latest_application_date', $job->latest_application_date, ['class' => 'form-control']) !!}
                     </div>
                     {{--<div class="form-group col-lg-3">--}}
-                        {{--<label for="published_at">Publicerad</label>--}}
-                        {{--{!! Form::date('published_at', Carbon\Carbon::parse($job->published_at), ['class' => 'form-control']) !!}--}}
+                    {{--<label for="published_at">Publicerad</label>--}}
+                    {{--{!! Form::date('published_at', Carbon\Carbon::parse($job->published_at), ['class' => 'form-control']) !!}--}}
                     {{--</div>--}}
 
-                    {{--{{ dd($allFilters['lan']) }}--}}
-
                     @if (!empty($allFilters))
-                        {{--{{ dd($allFilters) }}--}}
                         @if(array_key_exists('lan', $allFilters))
                             <div class="form-group col-lg-4">
                                 <label for="county">Län</label>
@@ -72,8 +69,6 @@
                                         <option value={{ $key }} label='{{ $option }}' name='{{ $option }}' {{($job->county == $key) ? 'selected' : ''}} >{{ $option }}</option>
                                     @endforeach
                                 </select>
-
-{{--                                {{ Form::select('county', $allFilters['lan'], $job->type, ['class' => 'form-control', 'placeholder' => 'Välj ett län..']) }}--}}
                             </div>
                         @endif
                     @endif
@@ -91,6 +86,10 @@
                     <div class="form-group col-lg-6">
                         <label for="external_link">Extern ansökningslänk</label>
                         {{ Form::text('external_link', $job->external_link, ['class' => 'form-control']) }}
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        @include('dashboard.partials.profiled-panel')
                     </div>
 
                     <div class="form-group col-xs-12">

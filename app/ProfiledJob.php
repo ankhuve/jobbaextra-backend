@@ -15,6 +15,7 @@ class ProfiledJob extends Model
      */
     protected $fillable = [
         'company_id',
+        'job_id',
         'start_date',
         'end_date',
         'title',

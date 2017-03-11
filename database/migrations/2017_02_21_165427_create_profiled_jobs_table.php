@@ -16,17 +16,14 @@ class CreateProfiledJobsTable extends Migration
         Schema::create('profiled_jobs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('company_id')->unsigned();
-            $table->integer('job_id')->unsigned();
+            $table->foreign('company_id')->references('id')->on('users')->onDelete('cascade');
+            $table->bigInteger('job_id')->unsigned();
+            $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->timestamp('start_date')->nullable();
             $table->timestamp('end_date')->nullable();
             $table->timestamps();
-        });
-
-        Schema::table('profiled_jobs', function($table) {
-            $table->foreign('job_id')->references('id')->on('users');
-            $table->foreign('company_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
