@@ -34,6 +34,8 @@ class UpdateJobRequest extends Request
             'latest_application_date' => 'required|date',
             'contact_email' => 'required|email',
             'external_link' => 'url',
+            'profiled-end' => 'required_with:profiled,true|date',
+            'profiled_title' => 'string|max:60',
         ];
     }
 }

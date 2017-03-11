@@ -11,13 +11,13 @@
     {{--</div>--}}
 
     <div class="row">
-        <div class="col-lg-4">
-            @include('dashboard.partials.paying-panel')
-        </div>
-        <div class="col-lg-4">
+        {{--<div class="col-lg-4">--}}
+            {{--@include('dashboard.partials.paying-panel')--}}
+        {{--</div>--}}
+        <div class="col-lg-6">
             @include('dashboard.partials.featured-panel')
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-6">
             @include('dashboard.partials.upload-logo-panel')
         </div>
     </div>
@@ -39,6 +39,7 @@
                         <th>Titel</th>
                         <th>Kontakt</th>
                         <th>Kommun</th>
+                        <th>Profilerat</th>
                         <th>Publiceringsdatum</th>
                         <th>Sista ansökan</th>
                         <th>Antal visningar</th>
@@ -55,7 +56,14 @@
                             <td><a href="{{ URL::current() }}/edit/{{ $job->id }}">{{ $job->title }}</a></td>
                             <td>{{ $job->contact_email }}</td>
                             <td>{{ $job->municipality }}</td>
-                            <td>{{ $job->published_at }}</td>
+                            <td>
+                                @if($job->isCurrentlyProfiled())
+                                    <i class="fa fa-check"></i>
+                                @else
+                                    <i class="fa fa-times"></i>
+                                @endif
+                            </td>
+                            <td>{{ \Carbon\Carbon::parse($job->published_at)->toDateString() }}</td>
                             <td>{{ $job->latest_application_date }}</td>
                             <td>{{ $job->page_views }}</td>
                             <td>{{ $job->application_clicks }}</td>
