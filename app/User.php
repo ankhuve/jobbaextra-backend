@@ -42,6 +42,16 @@ class User extends Authenticatable
     }
 
     /**
+     * A user may create many profiled jobs.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function profiledJobs()
+    {
+        return $this->hasMany('App\ProfiledJob');
+    }
+
+    /**
      *
      * Returns how many jobs the company has created.
      *

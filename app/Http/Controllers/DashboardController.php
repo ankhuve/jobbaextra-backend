@@ -6,6 +6,7 @@ use App\Events\JobCreated;
 use App\FeaturedCompany;
 use App\Http\Requests\UpdateJobRequest;
 use App\Job;
+use App\ProfiledJob;
 use App\User;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
@@ -133,7 +134,13 @@ class DashboardController extends Controller
         }
     }
 
-
+    /**
+     * Show the edit job form.
+     *
+     * @param $companyId
+     * @param null $jobId
+     * @return View
+     */
     public function editJob($companyId, $jobId = null)
     {
 //        $counties = [
@@ -186,13 +193,24 @@ class DashboardController extends Controller
         }
     }
 
+    /**
+     * Update an existing job.
+     *
+     * @param $companyId
+     * @param null $jobId
+     * @param UpdateJobRequest $request
+     * @return View
+     */
     public function saveJob($companyId, $jobId = null, UpdateJobRequest $request)
     {
         if($jobId){
             $job = Job::find($jobId);
         } else{
             $job = Job::create();
+
         }
+
+        $jobId = $job->id;
 
         $job->title = $request['title'];
         $job->work_place = $request['work_place'];
@@ -204,6 +222,45 @@ class DashboardController extends Controller
         $job->contact_email = $request['contact_email'];
         $job->external_link = $request['external_link'];
 
+        if($request['profiled'] && $request['profiled-end'] && ($job->hasBeenProfiled() || $job->isCurrentlyProfiled()))
+        {
+            // Set a new end and start date for the profiled job
+            $job->profiledJob->end_date = $request['profiled-end'];
+            $job->profiledJob->start_date = Carbon::now()->toDateString();
+
+            // If we have a custom title for the profiled job that is not the same as the job's.
+            if($request['profiled_title'] && ($request['profiled_title'] != $job->title))
+            {
+                $job->profiledJob->title = $request['profiled_title'];
+            }else
+            {
+                $job->profiledJob->title = null;
+            }
+
+            $job->profiledJob->save();
+
+        } elseif($request['profiled'] && !$job->hasBeenProfiled())
+        {
+            // Create a new profiled job
+            $profiledJob = ProfiledJob::create([
+                'company_id' => $companyId,
+                'job_id' => $jobId,
+                'start_date' => Carbon::now()->toDateString(),
+                'end_date' => $request['profiled-end']
+            ]);
+
+            // If we have a custom title for the profiled job that is not the same as the job's.
+            if($request['profiled_title'] && ($request['profiled_title'] != $job->title))
+            {
+                $profiledJob->title = $request['profiled_title'];
+            }
+
+            $profiledJob->save();
+        } else{
+            $profiledJob = ProfiledJob::where('job_id', $jobId);
+            $profiledJob->delete();
+        }
+
         $job->save();
 
         $request->session()->flash('status', 'Uppdaterat!');
@@ -213,6 +270,13 @@ class DashboardController extends Controller
 //        return view('dashboard.company.edit', compact('company', 'job'));
     }
 
+    /**
+     * Create a new job.
+     *
+     * @param $companyId
+     * @param UpdateJobRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function saveNewJob($companyId, UpdateJobRequest $request)
     {
         $company = User::find($companyId);

@@ -117,7 +117,7 @@ function ogImageDimensionsCheck(approved){
 function onLoadChangePanelStyle(){
     var onCompanyPage = $('#companyPage').length;
     if(onCompanyPage){
-        var panels = ['paying', 'featured', 'logo'];
+        var panels = ['featured', 'logo'];
         var isActive = false;
         for (var i in panels) {
             var $panel = $("#" + panels[i] + "-panel");
@@ -255,7 +255,6 @@ $('[data-confirm]').on('click', function(e){
 $('#logo-img').on('load', function(){
     ogImageDimensionsCheck();
 });
-
 
 $(document).on('ready', function(){
     $.ajaxSetup({
