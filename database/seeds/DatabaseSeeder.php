@@ -5,7 +5,7 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
 
-    protected $toTruncate = ['users', 'jobs', 'featured_companies'];
+    protected $toTruncate = ['users', 'jobs', 'featured_companies', 'pages', 'page_content'];
     /**
      * Run the database seeds.
      *
@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
          $this->call(UsersTableSeeder::class);
          $this->call(JobsTableSeeder::class);
          $this->call(FeaturedCompaniesTableSeeder::class);
+         $this->call(PagesTableSeeder::class);
+         $this->call(PageContentTableSeeder::class);
 
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
