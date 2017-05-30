@@ -47,3 +47,17 @@ $factory->define(App\FeaturedCompany::class, function (Faker\Generator $faker) {
         'end_date' => $faker->dateTimeThisYear,
     ];
 });
+
+$factory->define(App\Page::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->word,
+        'published_at' => Carbon::now()
+    ];
+});
+
+$factory->define(App\PageContent::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->word,
+        'content' => $faker->paragraphs(2, true)
+    ];
+});
