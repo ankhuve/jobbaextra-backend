@@ -29,7 +29,7 @@ class JobsController extends Controller
      */
     public function index()
     {
-        $jobs = Job::all();
+        $jobs = Job::latest()->get();
 
         $companies = User::where('role', 2)
             ->orWhere('role', 3)
