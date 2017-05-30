@@ -44,8 +44,8 @@ class DashboardController extends Controller
     {
         $users = User::where('role', 2)
             ->orWhere('role', 3)
+            ->latest()
             ->get(); // only get users registered as company
-//        $users = User::all();
 
         return view('dashboard.index', compact('users'));
     }
