@@ -5978,4 +5978,7 @@ table tr.interactive {
 .text-strong {
   font-weight: 700; }
 
+.chart-container {
+  height: 250px; }
+
 /*# sourceMappingURL=app.css.map */
