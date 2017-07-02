@@ -6,7 +6,7 @@
 
     <div class="bs-callout bs-callout-info">
         <p>
-            Här ser du till att Facebook-kopplingen till {{ env('APP_NAME') }} fungerar som den ska. Logga in med knappen nedan och ge tillgång till applikationen så att vi automatiskt kan posta nya jobbannonser Facebook-sidan.
+            Här ser du till att Facebook-kopplingen till {{ env('APP_NAME') }} fungerar som den ska. Logga in med knappen nedan och ge tillgång till applikationen så att vi automatiskt kan posta nya jobbannonser på Facebook-sidan.
             <br><br>
             Är du redan inloggad så ska allt vara grönt, då vet vi att allt fungerar som det ska. Är det någon punkt som har ett rött kryss, försök återansluta.
         </p>

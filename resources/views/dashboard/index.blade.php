@@ -9,6 +9,12 @@
         </p>
         <p>Du kan även <a href="{{ url('register') }}">registrera ett nytt företag</a>.</p>
     </div>
+
+    <div class="row">
+        @include('dashboard.partials.pageviews-chart')
+        @include('dashboard.partials.users-chart')
+    </div>
+
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
