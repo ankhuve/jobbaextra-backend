@@ -384,4 +384,34 @@ class DashboardController extends Controller
 
         return $afJobTypesArray;
     }
+
+    public function getNewJobsCountForDays($numDays)
+    {
+        $counts = [];
+        for($i = 0; $i < $numDays; $i++){
+            $date = Carbon::today()->addDays(-$i);
+            $count = Job::whereRaw('date(published_at) = ?', [$date])->count();
+
+            $dateAndMonthStr = $date->day . "/" . $date->month;
+            array_push($counts, [$dateAndMonthStr => $count]);
+        }
+
+        $counts = array_reverse($counts);
+        return $counts;
+    }
+
+    public function getNewUsersCountForDays($numDays)
+    {
+        $counts = [];
+        for($i = 0; $i < $numDays; $i++){
+            $date = Carbon::today()->addDays(-$i);
+            $count = User::whereRaw('date(created_at) = ?', [$date])->count();
+
+            $dateAndMonthStr = $date->day . "/" . $date->month;
+            array_push($counts, [$dateAndMonthStr => $count]);
+        }
+
+        $counts = array_reverse($counts);
+        return $counts;
+    }
 }

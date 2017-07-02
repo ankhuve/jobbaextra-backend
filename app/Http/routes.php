@@ -51,3 +51,6 @@ Route::get('/{company}/create', 'DashboardController@editJob')->name('createJob'
 Route::post('/{company}/create', 'DashboardController@saveNewJob')->name('saveNewJob');
 Route::get('/{company}/edit/{id}', 'DashboardController@editJob');
 Route::post('/{company}/edit/{id}', 'DashboardController@saveJob');
+
+Route::get('/api/statistics/newjobs/{numDays}', 'DashboardController@getNewJobsCountForDays');
+Route::get('/api/statistics/newusers/{numDays}', 'DashboardController@getNewUsersCountForDays');
