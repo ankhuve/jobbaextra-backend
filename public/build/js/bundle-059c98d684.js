@@ -17544,7 +17544,11 @@ if (ctx) {
                         yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                stepSize: 1
+                                callback: function callback(value, index, values) {
+                                    if (Math.floor(value) === value) {
+                                        return value;
+                                    }
+                                }
                             }
                         }]
                     },
@@ -17563,7 +17567,6 @@ if (ctx) {
                     }
                 }
             });
-            // $.publish('form.submitted', form);
         },
         error: function error(e) {
             console.log('Kunde inte hämta jobbstatistik.', e);
@@ -17605,7 +17608,11 @@ if (usersCtx) {
                         yAxes: [{
                             ticks: {
                                 beginAtZero: true,
-                                stepSize: 1
+                                callback: function callback(value, index, values) {
+                                    if (Math.floor(value) === value) {
+                                        return value;
+                                    }
+                                }
                             }
                         }]
                     },
@@ -17624,7 +17631,6 @@ if (usersCtx) {
                     }
                 }
             });
-            // $.publish('form.submitted', form);
         },
         error: function error(e) {
             console.log('Kunde inte hämta användarstatistik.', e);
