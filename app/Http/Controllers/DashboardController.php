@@ -214,7 +214,7 @@ class DashboardController extends Controller
 
         $job->title = $request['title'];
         $job->work_place = $request['work_place'];
-        $job->type = $request['type'];
+        $job->type = json_encode($request->input('type'));
         $job->county = $request['county'];
         $job->municipality = $request['municipality'];
         $job->description = $request['description'];
@@ -284,7 +284,7 @@ class DashboardController extends Controller
         $job = $company->jobs()->create([
             'title' => $request['title'],
             'work_place' => $request['work_place'],
-            'type' => $request['type'],
+            'type' => json_encode($request->input('type')),
             'county' => $request['county'],
             'municipality' => $request['municipality'],
             'description' => nl2br($request['description']),
@@ -292,6 +292,25 @@ class DashboardController extends Controller
             'contact_email' => $request['contact_email'],
             'external_link' => $request['external_link'],
         ]);
+
+        if($request['profiled'])
+        {
+            // Create a new profiled job
+            $profiledJob = ProfiledJob::create([
+                'company_id' => $companyId,
+                'job_id' => $job->id,
+                'start_date' => Carbon::now()->toDateString(),
+                'end_date' => $request['profiled-end']
+            ]);
+
+            // If we have a custom title for the profiled job that is not the same as the job's.
+            if($request['profiled_title'] && ($request['profiled_title'] != $job->title))
+            {
+                $profiledJob->title = $request['profiled_title'];
+            }
+
+            $profiledJob->save();
+        }
 
 
         $job->published_at = Carbon::now();
