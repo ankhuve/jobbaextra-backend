@@ -30,7 +30,7 @@
                                 <label for="type">Yrkesområde</label>
                                 @if(is_array(json_decode($job->type)))
                                     <select class="form-control" multiple required name="type[]" id="type">
-                                        @foreach($allFilters['yrkesgrupper'] as $yrkesgruppId => $yrkesgruppName)
+                                        @foreach($allFilters['yrkesomraden'] as $yrkesgruppId => $yrkesgruppName)
                                             {{ $isSelected = false }}
                                             @foreach(json_decode($job->type) as $type)
                                                 @if($type == $yrkesgruppId)
@@ -44,7 +44,7 @@
                                         @endforeach
                                     </select>
                                 @else
-                                    {{ Form::select('type[]', $allFilters['yrkesgrupper'], $job->type, ['class' => 'form-control', 'multiple', 'required']) }}
+                                    {{ Form::select('type[]', $allFilters['yrkesomraden'], $job->type, ['class' => 'form-control', 'multiple', 'required']) }}
                                 @endif
                                 <p class="help-block">Tips! Håll in Ctrl (Windows) eller Cmd (Mac) för att välja flera.</p>
                             </div>
