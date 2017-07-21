@@ -28,7 +28,25 @@
                         @if(array_key_exists('yrkesomraden', $allFilters))
                             <div class="form-group col-lg-6">
                                 <label for="type">Yrkesområde</label>
-                                {{ Form::select('type', $allFilters['yrkesomraden'], $job->type, ['class' => 'form-control', 'placeholder' => 'Välj ett yrkesområde..']) }}
+                                @if(is_array(json_decode($job->type)))
+                                    <select class="form-control" multiple required name="type[]" id="type">
+                                        @foreach($allFilters['yrkesgrupper'] as $yrkesgruppId => $yrkesgruppName)
+                                            {{ $isSelected = false }}
+                                            @foreach(json_decode($job->type) as $type)
+                                                @if($type == $yrkesgruppId)
+                                                    <option value="{{ $type }}" selected>{{ $yrkesgruppName }}</option>
+                                                    {{ $isSelected = true }}
+                                                @endif
+                                            @endforeach
+                                            @if(!$isSelected)
+                                                <option value="{{ $yrkesgruppId }}">{{ $yrkesgruppName }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                @else
+                                    {{ Form::select('type[]', $allFilters['yrkesgrupper'], $job->type, ['class' => 'form-control', 'multiple', 'required']) }}
+                                @endif
+                                <p class="help-block">Tips! Håll in Ctrl (Windows) eller Cmd (Mac) för att välja flera.</p>
                             </div>
                         @endif
                     @endif
