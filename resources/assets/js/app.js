@@ -1,3 +1,5 @@
+require('./bootstrap');
+
 function toggleDatePicker(){
     var target = $(this).data('date-toggle');
     $('#' + target + '-date-picker').toggle(200);
@@ -256,12 +258,8 @@ $('#logo-img').on('load', function(){
     ogImageDimensionsCheck();
 });
 
-$(document).on('ready', function(){
-    $.ajaxSetup({
-        headers: {'X-CSRF-Token': $('meta[name=_token]').attr('content')}
-    });
-    onLoadChangePanelStyle();
-
+onLoadChangePanelStyle();
+$(document).ready(function() {
     $('.summernote').summernote({
         lang: 'sv-SE', // default: 'en-US'
         height: 300,                 // set editor height
@@ -284,13 +282,13 @@ $(document).on('ready', function(){
     });
 
     summernote = $('.summernote-extended').summernote({
-        lang: 'sv-SE', // default: 'en-US'
+        // lang: 'sv-SE', // default: 'en-US'
         height: 300,                 // set editor height
         minHeight: null,             // set minimum height of editor
         disableDragAndDrop: false,
         maximumImageFileSize: 1048576,
-        callbacks:{
-            onImageUpload: function(files, editor, welEditable) {
+        callbacks: {
+            onImageUpload: function (files, editor, welEditable) {
                 // upload image to server and create imgNode...
                 for (var i = files.length - 1; i >= 0; i--) {
                     sendFile(files[i], editor, welEditable);
@@ -311,9 +309,9 @@ $(document).on('ready', function(){
             ['misc', ['undo', 'redo', 'codeview']]
         ]
     });
-
-    //$('.modal').on('show.bs.modal', function () {
-    //    var scrollTop = $(window).scrollTop();
-    //    $(this).css({'top' : scrollTop + 50 +  'px'});
-    //})
 });
+
+//$('.modal').on('show.bs.modal', function () {
+//    var scrollTop = $(window).scrollTop();
+//    $(this).css({'top' : scrollTop + 50 +  'px'});
+//})
