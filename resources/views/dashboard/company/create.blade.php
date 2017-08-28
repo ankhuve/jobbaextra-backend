@@ -29,7 +29,8 @@
                         @if(array_key_exists('yrkesgrupper', $allFilters))
                             <div class="form-group col-lg-6">
                                 <label for="type">Yrkesområde</label>
-                                {{ Form::select('type', $allFilters['yrkesgrupper'], null, ['class' => 'form-control', 'placeholder' => 'Välj ett yrkesområde..', 'required']) }}
+                                {{ Form::select('type[]', $allFilters['yrkesgrupper'], null, ['class' => 'form-control', 'multiple', 'required', 'data-form-array' => 'type']) }}
+                                <p class="help-block">Tips! Håll in Ctrl (Windows) eller Cmd (Mac) för att välja flera.</p>
                             </div>
                         @endif
                     @endif
@@ -92,6 +93,10 @@
                     <div class="form-group col-lg-6">
                         <label for="external_link">Extern ansökningslänk</label>
                         {{ Form::text('external_link', null, ['class' => 'form-control']) }}
+                    </div>
+
+                    <div class="form-group col-lg-6">
+                        @include('dashboard.partials.profiled-panel')
                     </div>
 
                     <div class="form-group col-xs-12">
