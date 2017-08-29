@@ -153,5 +153,5 @@ table{
 }
 
 select[multiple] {
-    overflow-y: scroll;
+    -webkit-appearance: listbox;
 }
