@@ -151,3 +151,7 @@ table{
 .toggle-hide{
     display: none;
 }
+
+select[multiple] {
+    overflow-y: scroll;
+}
