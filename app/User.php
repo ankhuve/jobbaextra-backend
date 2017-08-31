@@ -175,13 +175,22 @@ class User extends Authenticatable
      */
     public function featured()
     {
-//        return $this->hasOne('App\FeaturedCompany');
         if($this->isFeatured())
         {
             $featuredObj = FeaturedCompany::where('company_id', $this->id)->first();
             return $featuredObj;
         }
         return false;
+    }
+
+    /**
+     * A user may have an associated note.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function note()
+    {
+        return $this->hasOne('App\Note');
     }
 }
 
