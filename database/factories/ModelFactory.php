@@ -34,7 +34,7 @@ $factory->define(App\Job::class, function (Faker\Generator $faker) {
         'county' => $faker->country,
         'municipality' => $faker->city,
         'description' => $faker->paragraph,
-        'latest_application_date' => Carbon::now()->addDays(random_int(1,30)),
+        'latest_application_date' => Carbon::now()->addYear(),
         'contact_email' => $faker->companyEmail,
         'published_at' => $faker->dateTime,
     ];
@@ -58,6 +58,12 @@ $factory->define(App\Page::class, function (Faker\Generator $faker) {
 $factory->define(App\PageContent::class, function (Faker\Generator $faker) {
     return [
         'title' => $faker->word,
+        'content' => $faker->paragraphs(2, true)
+    ];
+});
+
+$factory->define(App\Note::class, function (Faker\Generator $faker) {
+    return [
         'content' => $faker->paragraphs(2, true)
     ];
 });
