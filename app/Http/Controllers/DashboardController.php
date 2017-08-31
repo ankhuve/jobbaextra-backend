@@ -343,30 +343,16 @@ class DashboardController extends Controller
         array_push($searchOptions, $results);
 
         // yrkesområden
-//        $results = $client->get('platsannonser/soklista/yrkesomraden', [
-//            'headers' => [
-//                'Accept'          => 'application/json',
-//                'Accept-Language' => 'sv-se,sv'
-//            ]
-//        ])->getBody()->getContents();
-
-        // vi låser oss till pedagogiska jobb
-        $searchParams = ['yrkesomradeid' => 15];
-
-        // hämta alla yrkesgrupper inom pedagogiska jobb
-        $results = $client->get('platsannonser/soklista/yrkesgrupper', [
-            'query' => $searchParams,
+        $results = $client->get('platsannonser/soklista/yrkesomraden', [
             'headers' => [
                 'Accept'          => 'application/json',
                 'Accept-Language' => 'sv-se,sv'
             ]
         ])->getBody()->getContents();
-
         $results = json_decode($results);
         $results->soklista->sokdata = $this->addCustomJobTypes($results->soklista->sokdata);
 
         array_push($searchOptions, $results);
-
         return $searchOptions;
     }
 
@@ -374,21 +360,9 @@ class DashboardController extends Controller
     {
         $customJobTypes = array();
 
-        // Rektorer & Skolledare
-        $type = new stdClass();
-        $type->id = '9000';
-        $type->namn = 'Rektorer och skolledare';
-        array_push($customJobTypes, $type);
-
-        // Förskolechef
-        $type = new stdClass();
-        $type->id = '9001';
-        $type->namn = 'Förskolechef';
-        array_push($customJobTypes, $type);
-
         // Övrigt
         $type = new stdClass();
-        $type->id = '9002';
+        $type->id = '9000';
         $type->namn = 'Övrigt';
         array_push($customJobTypes, $type);
 

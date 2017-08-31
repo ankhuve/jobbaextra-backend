@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\FeaturedCompany;
 use App\Http\Requests\StoreCompanyLogo;
+use App\Http\Requests\UpdateUserNoteRequest;
 use App\Job;
+use App\Note;
 use App\User;
 use Carbon\Carbon;
 //use Illuminate\Foundation\Auth\User;
@@ -193,5 +195,30 @@ class CompanyController extends Controller
         $job = Job::find($jobId);
         $job->delete();
         return redirect()->route('company', ['company' => $companyId]);
+    }
+
+    public function setNote($userId, UpdateUserNoteRequest $request)
+    {
+        $user = User::find($userId);
+        if ($user->note) {
+            $user->note->content = $request->get('content');
+            $user->note->save();
+            $updateMsg = 'Anteckning uppdaterad!';
+        }
+        else {
+            $note = new Note;
+            $note->user_id = $userId;
+            $note->content = $request->get('content');
+            $note->save();
+            $updateMsg = 'Anteckning skapad!';
+        }
+
+        $response = array(
+            'status' => 'success',
+            'msg' => $updateMsg,
+            'request' => request()->all()
+        );
+
+        return response()->json($response);
     }
 }

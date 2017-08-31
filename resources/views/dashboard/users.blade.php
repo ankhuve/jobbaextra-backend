@@ -12,7 +12,7 @@
     @if(isset($users))
         @foreach($users as $user)
             <div class="row">
-                <div class="col-lg-6">
+                <div class="col-lg-8">
                     <div class="panel panel-primary user-info" id="{{ $user->id }}" style="display: none;">
                         <div class="panel-heading">
                             <h4>{{ $user->name }}</h4>
@@ -49,22 +49,29 @@
                                     <h5 class="text-strong">Kategorier <span class="badge">{{ $user->categories ? count($user->categories) : "0" }}</span></h5>
                                 </div>
                                 <div class="col-lg-8">
-                                    @if( $user->categories && !empty($allFilters) && array_key_exists('yrkesgrupper', $allFilters))
+                                    @if( $user->categories && !empty($allFilters) && array_key_exists('yrkesomraden', $allFilters))
                                         <ul>
                                             @foreach($user->categories as $category)
-                                                <li><h5>{{ $allFilters['yrkesgrupper'][$category] }}</h5></li>
+                                                <li><h5>{{ $allFilters['yrkesomraden'][$category] }}</h5></li>
                                             @endforeach
                                         </ul>
                                     @endif
                                 </div>
                             </div>
                             @if($user->hasCV())
-                                <a class="center-block" href="{{ action('DashboardController@download', $user->id) }}">
+                                <a href="{{ action('DashboardController@download', $user->id) }}">
                                     <button class="btn btn-primary m-t-1">
-                                        <i class="fa fa-file" aria-hidden="true"></i> Hämta CV
+                                        <i class="fa fa-file" aria-hidden="true"></i>&nbsp;&nbsp;Hämta CV
                                     </button>
                                 </a>
                             @endif
+
+                            <button class="btn btn-success m-t-1" data-toggle data-target={{ 'content-' . $user->id }}>
+                                <i class="fa fa-pencil"></i>&nbsp;&nbsp;Antecking
+                            </button>
+
+                            @include('dashboard.partials.user-note')
+
                         </div>
                     </div>
                 </div>
@@ -79,6 +86,7 @@
                 <th>Namn</th>
                 <th>E-mail</th>
                 <th>Konto skapat</th>
+                <th>Anteckning</th>
                 <th>Har CV</th>
             </tr>
             </thead>
@@ -91,6 +99,7 @@
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->created_at }}</td>
+                        <td>{!! !is_null($user->note) ? '<i class="fa fa-check" aria-hidden="true"></i>' : '<i class="fa fa-times" aria-hidden="true"></i>' !!}</td>
                         <td>{!! $user->hasCV() ? '<i class="fa fa-check" aria-hidden="true"></i>' : '<i class="fa fa-times" aria-hidden="true"></i>' !!}</td>
                     </tr>
 
