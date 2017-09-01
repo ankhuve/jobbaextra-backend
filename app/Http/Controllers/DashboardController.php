@@ -418,7 +418,7 @@ class DashboardController extends Controller
         $counts = [];
         for($i = 0; $i < $numDays; $i++){
             $date = Carbon::today()->addDays(-$i);
-            $count = User::whereRaw('date(created_at) = ?', [$date])->count();
+            $count = User::where('role', 1)->whereRaw('date(created_at) = ?', [$date])->count();
 
             $dateAndMonthStr = $date->day . "/" . $date->month;
             array_push($counts, [$dateAndMonthStr => $count]);
