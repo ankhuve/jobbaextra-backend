@@ -9,7 +9,6 @@ use App\Job;
 use App\Note;
 use App\User;
 use Carbon\Carbon;
-//use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
