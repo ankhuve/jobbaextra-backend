@@ -15,7 +15,7 @@ elixir(function(mix) {
     mix.sass('app.scss')
         .browserify(['app.js', 'jobbCharts.js'])
         .browserSync({
-            proxy: 'jobbadmin.app',
+            proxy: 'jobbadmin.test',
             port: 4000
         });
 
