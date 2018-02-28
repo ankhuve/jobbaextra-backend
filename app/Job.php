@@ -54,7 +54,7 @@ class Job extends Model
      */
     public function isCurrentlyProfiled()
     {
-        return count($this->profiledJob) && ($this->profiledJob->end_date > Carbon::now()) ? true : false;
+        return !is_null($this->profiledJob) && ($this->profiledJob->end_date > Carbon::now()) ? true : false;
     }
 
     /**
@@ -64,6 +64,6 @@ class Job extends Model
      */
     public function hasBeenProfiled()
     {
-        return count($this->profiledJob) && ($this->profiledJob->end_date < Carbon::now());
+        return !is_null($this->profiledJob) && ($this->profiledJob->end_date < Carbon::now());
     }
 }
