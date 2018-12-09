@@ -13,17 +13,17 @@ class PageContentTableSeeder extends Seeder
     {
         factory('App\PageContent')->create([
             'page_id' => 3,
-            'type' => 'register_puff'
-        ]);
-
-        factory('App\PageContent')->create([
-            'page_id' => 3,
-            'type' => 'register_puff'
+            'type' => 'content'
         ]);
 
         factory('App\PageContent')->create([
             'page_id' => 4,
-            'type' => 'panel'
+            'type' => 'hero'
+        ]);
+
+        factory('App\PageContent')->create([
+            'page_id' => 4,
+            'type' => 'content'
         ]);
 
         factory('App\PageContent')->create([

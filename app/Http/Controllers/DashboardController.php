@@ -143,46 +143,7 @@ class DashboardController extends Controller
      */
     public function editJob($companyId, $jobId = null)
     {
-//        $counties = [
-//            '10' => 'Blekinge län',
-//            '20' => 'Dalarnas län',
-//            '9' => 'Gotlands län',
-//            '21' => 'Gävleborgs län',
-//            '13' => 'Hallands län',
-//            '23' => 'Jämtlands län',
-//            '6' => 'Jönköpings län',
-//            '8' => 'Kalmar län',
-//            '7' => 'Kronobergs län',
-//            '25' => 'Norrbottens län',
-//            '12' => 'Skåne län',
-//            '1' => 'Stockholms län',
-//            '4' => 'Södermanlands län',
-//            '3' => 'Uppsala län',
-//            '17' => 'Värmlands län',
-//            '24' => 'Västerbottens län',
-//            '22' => 'Västernorrlands län',
-//            '19' => 'Västmanlands län',
-//            '14' => 'Västra Götalands ',
-//            '18' => 'Örebro län',
-//            '5' => 'Östergötlands län',
-//            '90' => 'Ospecificerad arbetsort'
-//        ];
-
-        $filters = $this->getApiFiltersArray();
-
-        $allFilters = [];
-
-        if(!empty($filters)){
-            foreach ($filters as $filter) {
-                $filterArray = [];
-                $options = $filter->soklista->sokdata;
-                $filterName = $filter->soklista->listnamn;
-                foreach ($options as $option) {
-                    $filterArray[$option->id] = $option->namn;
-                }
-                $allFilters[$filterName] = $filterArray;
-            }
-        }
+        $allFilters = config('app.filters');
 
         $company = User::find($companyId);
         if($jobId){
@@ -324,36 +285,6 @@ class DashboardController extends Controller
         return back();
 
 //        return view('dashboard.company.edit', compact('company', 'job'));
-    }
-
-
-    public function getApiFiltersArray()
-    {
-        $client = new Client(['base_uri' => 'http://api.arbetsformedlingen.se/af/v0/']);
-        $searchOptions = array();
-
-        // län
-        $results = $client->get('platsannonser/soklista/lan', [
-            'headers' => [
-                'Accept'          => 'application/json',
-                'Accept-Language' => 'sv-se,sv'
-            ]
-        ])->getBody()->getContents();
-        $results = json_decode($results);
-        array_push($searchOptions, $results);
-
-        // yrkesområden
-        $results = $client->get('platsannonser/soklista/yrkesomraden', [
-            'headers' => [
-                'Accept'          => 'application/json',
-                'Accept-Language' => 'sv-se,sv'
-            ]
-        ])->getBody()->getContents();
-        $results = json_decode($results);
-        $results->soklista->sokdata = $this->addCustomJobTypes($results->soklista->sokdata);
-
-        array_push($searchOptions, $results);
-        return $searchOptions;
     }
 
     private function addCustomJobTypes(array $afJobTypesArray)

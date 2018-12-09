@@ -2,7 +2,40 @@
 
 return [
 
-    'name' => 'Jobbrek',
+    'name' => 'Jobbförmedlaren',
+    'filters' => [
+        'lan' => [
+            '10' => 'Blekinge län',
+            '20' => 'Dalarnas län',
+            '9' => 'Gotlands län',
+            '21' => 'Gävleborgs län',
+            '13' => 'Hallands län',
+            '23' => 'Jämtlands län',
+            '6' => 'Jönköpings län',
+            '8' => 'Kalmar län',
+            '7' => 'Kronobergs län',
+            '25' => 'Norrbottens län',
+            '12' => 'Skåne län',
+            '1' => 'Stockholms län',
+            '4' => 'Södermanlands län',
+            '3' => 'Uppsala län',
+            '17' => 'Värmlands län',
+            '24' => 'Västerbottens län',
+            '22' => 'Västernorrlands län',
+            '19' => 'Västmanlands län',
+            '14' => 'Västra Götalands ',
+            '18' => 'Örebro län',
+            '5' => 'Östergötlands län',
+            '90' => 'Ospecificerad arbetsort'
+        ],
+        'yrkesomraden' => [
+            '15' => 'Utbildning',
+            '3' => 'IT/Teknik',
+            '8' => 'Sjukvård',
+            '20' => 'Chefsjobb',
+            '1' => 'Ekonomi/juridik',
+        ]
+    ],
 
     /*
     |--------------------------------------------------------------------------

@@ -19,7 +19,7 @@ return [
      */
     'facebook_config' => [
         'app_id' => env('FACEBOOK_APP_ID'),
-        'app_secret' => env('FACEBOOK_APP_SECRET'),
+        'app_secret' => env('FACEBOOK_APP_SECRET', 'SomeRandomString'),
         'default_graph_version' => 'v2.8',
         //'enable_beta_mode' => true,
         //'http_client_handler' => 'guzzle',
