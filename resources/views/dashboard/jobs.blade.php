@@ -57,13 +57,21 @@
                         <th>Sista ansökan</th>
                         <th>Antal visningar</th>
                         <th>Ansökningar</th>
+                        <th>Delat</th>
                     </tr>
                     </thead>
                     <tbody>
 
                     @foreach($jobs as $job)
                         <tr>
-                            <td><a target="_blank" href="{{ env('URL_FRONT', 'http://localhost:3000') }}/jobb/{{ $job->id }}/{{ str_slug($job->title) }}"><i class="fa fa-external-link"></i>{{ $job->title }}</a></td>
+                            <td>
+                                <a target="_blank" href="{{ env('URL_FRONT', 'http://localhost:3000') }}/jobb/{{ $job->id }}/{{ str_slug($job->title) }}">
+                                    <i class="fa fa-external-link"></i>
+                                </a>
+                                <a href="/{{ $job->user->id . '/' . 'edit/' . $job->id }}">
+                                    {{ $job->title }}
+                                </a>
+                            </td>
                             <td>
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#jobOwnerModal" data-current-owner="{{ $job->user->id }}" data-job-id="{{ $job->id }}">
                                     {{ $job->user->name }}
@@ -74,6 +82,13 @@
                             <td>{{ $job->latest_application_date }}</td>
                             <td>{{ $job->page_views }}</td>
                             <td>{{ $job->application_clicks }}</td>
+                            <td>
+                                @if($job->isShared())
+                                    <i class="fa fa-check"></i>
+                                @else
+                                    <i class="fa fa-times"></i>
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
 

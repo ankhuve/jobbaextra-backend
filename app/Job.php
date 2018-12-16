@@ -66,4 +66,24 @@ class Job extends Model
     {
         return !is_null($this->profiledJob) && ($this->profiledJob->end_date < Carbon::now());
     }
+
+    /**
+     * A job may be shared.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function shared()
+    {
+        return $this->hasOne('App\SharedJob');
+    }
+
+    /**
+     * Has the job been shared?
+     *
+     * @return bool
+     */
+    public function isShared()
+    {
+        return !is_null($this->hasOne('App\SharedJob')->getResults());
+    }
 }
