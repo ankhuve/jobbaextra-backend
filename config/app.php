@@ -2,7 +2,7 @@
 
 return [
 
-    'name' => 'Jobbförmedlaren',
+    'name' => 'Jobbformedlaren',
     'filters' => [
         'lan' => [
             '10' => 'Blekinge län',
