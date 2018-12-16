@@ -151,7 +151,7 @@ class DashboardController extends Controller
 
         if($jobId){
             $job = Job::find($jobId);
-            $linkToJob = (env('APP_ENV') != 'production' ? env('APP_URL') : env('URL_FRONT')) . '/jobb/' . $job->id . '/' . str_slug($job->title);
+            $linkToJob = env('URL_FRONT') . '/jobb/' . $job->id . '/' . str_slug($job->title);
 
             return view('dashboard.company.edit', compact('company', 'job', 'allFilters', 'linkToJob'));
         } else{
