@@ -241,6 +241,22 @@ var toggleElement = function(){
     $('#' + target).toggle(250);
 };
 
+let shareOnFacebook = function () {
+    $.ajax({
+        type: 'GET',
+        url: window.location.href + '/share',
+        success: function (data) {
+            // ändra texten och klass på rutan så den ändrar stil
+            changePanelStyle(data.success, $('#sharing-panel'));
+            $('#sharing-panel').find('p')[0].innerHTML = 'Jobbet är nu delat!';
+        },
+        error: function(e){
+            console.log("Error saving job's shared state: ", e);
+        }
+
+    });
+};
+
 $.subscribe('form.submitted', function(e){
     $('.flash-message').fadeIn(500).delay(1500).fadeOut(500);
 });
@@ -251,6 +267,7 @@ $('form[data-remote]').on('submit', submitAjaxRequest);
 $('form input[data-date-toggle]').on('click', toggleDatePicker);
 $('[data-toggle=modal]').on('click', setCurrentOwnerInSelect);
 $('[data-toggle]').on('click', toggleElement);
+$('#shareBtn').on('click', shareOnFacebook);
 $('[data-confirm]').on('click', function(e){
     if (!confirm('Är du säker på att du vill ta bort detta? Detta går inte att ångra.')) e.preventDefault();
 });

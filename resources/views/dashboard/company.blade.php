@@ -44,6 +44,7 @@
                         <th>Sista ansökan</th>
                         <th>Antal visningar</th>
                         <th>Ansökningar</th>
+                        <th>Delat på Facebook</th>
                         @if(Auth::user()->role === 4)
                             <th class="text-danger">Radera</th>
                         @endif
@@ -67,6 +68,13 @@
                             <td>{{ $job->latest_application_date }}</td>
                             <td>{{ $job->page_views }}</td>
                             <td>{{ $job->application_clicks }}</td>
+                            <td>
+                                @if($job->isShared())
+                                    <i class="fa fa-check"></i>
+                                @else
+                                    <i class="fa fa-times"></i>
+                                @endif
+                            </td>
                             @if(Auth::user()->role === 4)
                                 <td><a data-confirm="delete" href="{{ action('CompanyController@delete', ['jobId' => $job->id, 'company' => $company->id]) }}"><i class="fa fa-times"></i></a></td>
                             @endif

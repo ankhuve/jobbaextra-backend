@@ -110,6 +110,10 @@
                         @include('dashboard.partials.profiled-panel')
                     </div>
 
+                    <div class="form-group col-lg-6">
+                        @include('dashboard.partials.sharing-panel')
+                    </div>
+
                     <div class="form-group col-xs-12">
                         <button data-submit type="submit" class="btn btn-primary btn-submit col-md-2">Spara</button>
                         <a href="/{{ $company->id }}" class="btn btn-warning col-md-2 pull-right">
