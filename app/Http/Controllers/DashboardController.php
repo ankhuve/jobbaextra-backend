@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\JobCreated;
 use App\FeaturedCompany;
 use App\Http\Requests\UpdateJobRequest;
 use App\Job;
 use App\ProfiledJob;
+use App\SharedJob;
 use App\User;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Laravel\View;
@@ -185,9 +186,13 @@ class DashboardController extends Controller
         }
 
         $company = User::find($companyId);
+
+
         if($jobId){
             $job = Job::find($jobId);
-            return view('dashboard.company.edit', compact('company', 'job', 'allFilters'));
+            $linkToJob = (env('APP_ENV') != 'production' ? env('APP_URL') : env('URL_FRONT')) . '/jobb/' . $job->id . '/' . str_slug($job->title);
+
+            return view('dashboard.company.edit', compact('company', 'job', 'allFilters', 'linkToJob'));
         } else{
             return view('dashboard.company.create', compact('company', 'allFilters'));
         }
@@ -319,8 +324,6 @@ class DashboardController extends Controller
 
         $request->session()->flash('status', 'Sparat! Du kan nu skapa ett nytt jobb om du vill.');
 
-        event(new JobCreated($job, $request));
-
         return back();
 
 //        return view('dashboard.company.edit', compact('company', 'job'));
@@ -406,5 +409,23 @@ class DashboardController extends Controller
 
         $counts = array_reverse($counts);
         return $counts;
+    }
+
+    public function share(Request $request, $companyId, $jobId)
+    {
+        $job = Job::find($jobId);
+        if (!empty($job)) {
+            if (!$job->isShared()) {
+                SharedJob::create([
+                    'job_id' => $job->id
+                ]);
+                return response()->json(['success' => true]);
+            } else {
+                $shared = SharedJob::where('job_id', $job->id)->first();
+                $shared->touch();
+                return response()->json(['success' => true]);
+            }
+        }
+        return response()->json(['success' => false, 'message' => 'Job could not be found'], 400);
     }
 }
