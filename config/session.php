@@ -109,7 +109,7 @@ return [
     |
     */
 
-    'cookie' => 'jobbiskolaadmin_session',
+    'cookie' => 'jobbrekadmin_session',
 
     /*
     |--------------------------------------------------------------------------
