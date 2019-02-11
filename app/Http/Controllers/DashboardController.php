@@ -363,21 +363,9 @@ class DashboardController extends Controller
     {
         $customJobTypes = array();
 
-        // Rektorer & Skolledare
-        $type = new stdClass();
-        $type->id = '9000';
-        $type->namn = 'Rektorer och skolledare';
-        array_push($customJobTypes, $type);
-
-        // Förskolechef
-        $type = new stdClass();
-        $type->id = '9001';
-        $type->namn = 'Förskolechef';
-        array_push($customJobTypes, $type);
-
         // Övrigt
         $type = new stdClass();
-        $type->id = '9002';
+        $type->id = '9000';
         $type->namn = 'Övrigt';
         array_push($customJobTypes, $type);
 
