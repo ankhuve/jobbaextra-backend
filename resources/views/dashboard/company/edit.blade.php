@@ -25,12 +25,12 @@
 
                 <div class="row">
                     @if (!empty($allFilters))
-                        @if(array_key_exists('yrkesgrupper', $allFilters))
+                        @if(array_key_exists('yrkesomraden', $allFilters))
                             <div class="form-group col-lg-6">
                                 <label for="type">Yrkesområde</label>
                                 @if(is_array(json_decode($job->type)))
                                     <select class="form-control" multiple required name="type[]" id="type">
-                                        @foreach($allFilters['yrkesgrupper'] as $yrkesgruppId => $yrkesgruppName)
+                                        @foreach($allFilters['yrkesomraden'] as $yrkesgruppId => $yrkesgruppName)
                                             {{ $isSelected = false }}
                                             @foreach(json_decode($job->type) as $type)
                                                 @if($type == $yrkesgruppId)

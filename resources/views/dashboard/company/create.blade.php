@@ -26,10 +26,10 @@
 
                 <div class="row">
                     @if (!empty($allFilters))
-                        @if(array_key_exists('yrkesgrupper', $allFilters))
+                        @if(array_key_exists('yrkesomraden', $allFilters))
                             <div class="form-group col-lg-6">
                                 <label for="type">Yrkesområde</label>
-                                {{ Form::select('type[]', $allFilters['yrkesgrupper'], null, ['class' => 'form-control', 'multiple', 'required', 'data-form-array' => 'type']) }}
+                                {{ Form::select('type[]', $allFilters['yrkesomraden'], null, ['class' => 'form-control', 'multiple', 'required', 'data-form-array' => 'type']) }}
                                 <p class="help-block">Tips! Håll in Ctrl (Windows) eller Cmd (Mac) för att välja flera.</p>
                             </div>
                         @endif
@@ -54,8 +54,8 @@
                         {!! Form::date('latest_application_date', Carbon\Carbon::today()->addMonth(1), ['class' => 'form-control', 'required']) !!}
                     </div>
                     {{--<div class="form-group col-lg-3">--}}
-                        {{--<label for="published_at">Publicerad</label>--}}
-                        {{--{!! Form::date('published_at', null, ['class' => 'form-control', 'required']) !!}--}}
+                    {{--<label for="published_at">Publicerad</label>--}}
+                    {{--{!! Form::date('published_at', null, ['class' => 'form-control', 'required']) !!}--}}
                     {{--</div>--}}
 
                     {{--{{ dd($allFilters['lan']) }}--}}
