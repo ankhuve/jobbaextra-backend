@@ -75,7 +75,7 @@ class DashboardController extends Controller
             ->paginate(25); // paginate the users
 //            ->get(); // only get users registered as users
 
-        $filters = $this->getApiFiltersArray();
+//        $filters = $this->getApiFiltersArray();
 
         $allFilters = [];
 
@@ -143,53 +143,62 @@ class DashboardController extends Controller
      */
     public function editJob($companyId, $jobId = null)
     {
-//        $counties = [
-//            '10' => 'Blekinge län',
-//            '20' => 'Dalarnas län',
-//            '9' => 'Gotlands län',
-//            '21' => 'Gävleborgs län',
-//            '13' => 'Hallands län',
-//            '23' => 'Jämtlands län',
-//            '6' => 'Jönköpings län',
-//            '8' => 'Kalmar län',
-//            '7' => 'Kronobergs län',
-//            '25' => 'Norrbottens län',
-//            '12' => 'Skåne län',
-//            '1' => 'Stockholms län',
-//            '4' => 'Södermanlands län',
-//            '3' => 'Uppsala län',
-//            '17' => 'Värmlands län',
-//            '24' => 'Västerbottens län',
-//            '22' => 'Västernorrlands län',
-//            '19' => 'Västmanlands län',
-//            '14' => 'Västra Götalands ',
-//            '18' => 'Örebro län',
-//            '5' => 'Östergötlands län',
-//            '90' => 'Ospecificerad arbetsort'
-//        ];
+        $counties = [
+            '10' => 'Blekinge län',
+            '20' => 'Dalarnas län',
+            '9' => 'Gotlands län',
+            '21' => 'Gävleborgs län',
+            '13' => 'Hallands län',
+            '23' => 'Jämtlands län',
+            '6' => 'Jönköpings län',
+            '8' => 'Kalmar län',
+            '7' => 'Kronobergs län',
+            '25' => 'Norrbottens län',
+            '12' => 'Skåne län',
+            '1' => 'Stockholms län',
+            '4' => 'Södermanlands län',
+            '3' => 'Uppsala län',
+            '17' => 'Värmlands län',
+            '24' => 'Västerbottens län',
+            '22' => 'Västernorrlands län',
+            '19' => 'Västmanlands län',
+            '14' => 'Västra Götalands ',
+            '18' => 'Örebro län',
+            '5' => 'Östergötlands län',
+            '90' => 'Ospecificerad arbetsort'
+        ];
 
-        $filters = $this->getApiFiltersArray();
-
-        $allFilters = [];
-
-        if(!empty($filters)){
-            foreach ($filters as $filter) {
-                $filterArray = [];
-                $options = $filter->soklista->sokdata;
-                $filterName = $filter->soklista->listnamn;
-                foreach ($options as $option) {
-                    $filterArray[$option->id] = $option->namn;
-                }
-                $allFilters[$filterName] = $filterArray;
-            }
-        }
+        $jobTypes = [
+            1 => "Administration, ekonomi, juridik",
+            2 => "Bygg och anläggning",
+            20 => "Chefer och verksamhetsledare",
+            3 => "Data/IT",
+            5 => "Försäljning, inköp, marknadsföring",
+            6 => "Hantverksyrken",
+            7 => "Hotell, restaurang, storhushåll",
+            8 => "Hälso- och sjukvård",
+            9 => "Industriell tillverkning",
+            10 => "Installation, drift, underhåll",
+            4 => "Kropps- och skönhetsvård",
+            11 => "Kultur, media, design",
+            22 => "Militärt arbete",
+            13 => "Naturbruk",
+            14 => "Naturvetenskapligt arbete",
+            15 => "Pedagogiskt arbete",
+            12 => "Sanering och renhållning",
+            16 => "Socialt arbete",
+            17 => "Säkerhetsarbete",
+            18 => "Tekniskt arbete",
+            19 => "Transport",
+            9000 => "Övrigt",
+        ];
 
         $company = User::find($companyId);
         if($jobId){
             $job = Job::find($jobId);
-            return view('dashboard.company.edit', compact('company', 'job', 'allFilters'));
+            return view('dashboard.company.edit', compact('company', 'job', 'counties', 'jobTypes'));
         } else{
-            return view('dashboard.company.create', compact('company', 'allFilters'));
+            return view('dashboard.company.create', compact('company', 'counties', 'jobTypes'));
         }
     }
 

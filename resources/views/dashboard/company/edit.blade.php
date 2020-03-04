@@ -24,32 +24,34 @@
             <div class="panel-body">
 
                 <div class="row">
-                    @if (!empty($allFilters))
-                        @if(array_key_exists('yrkesomraden', $allFilters))
-                            <div class="form-group col-lg-6">
-                                <label for="type">Yrkesområde</label>
-                                @if(is_array(json_decode($job->type)))
-                                    <select class="form-control" multiple required name="type[]" id="type">
-                                        @foreach($allFilters['yrkesomraden'] as $yrkesgruppId => $yrkesgruppName)
-                                            {{ $isSelected = false }}
-                                            @foreach(json_decode($job->type) as $type)
-                                                @if($type == $yrkesgruppId)
-                                                    <option value="{{ $type }}" selected>{{ $yrkesgruppName }}</option>
-                                                    {{ $isSelected = true }}
-                                                @endif
-                                            @endforeach
-                                            @if(!$isSelected)
-                                                <option value="{{ $yrkesgruppId }}">{{ $yrkesgruppName }}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                @else
-                                    {{ Form::select('type[]', $allFilters['yrkesomraden'], $job->type, ['class' => 'form-control', 'multiple', 'required']) }}
-                                @endif
-                                <p class="help-block">Tips! Håll in Ctrl (Windows) eller Cmd (Mac) för att välja flera.</p>
-                            </div>
+                    {{--                    @if (!empty($allFilters))--}}
+                    {{--                        @if(array_key_exists('yrkesomraden', $allFilters))--}}
+                    <div class="form-group col-lg-6">
+                        <label for="type">Yrkesområde</label>
+                        @if(is_array(json_decode($job->type)))
+                            <select class="form-control" multiple required name="type[]" id="type">
+                                @foreach($jobTypes as $key => $value)
+                                    {{ $isSelected = false }}
+                                    @foreach(json_decode($job->type) as $type)
+                                        @if($type == $key)
+                                            <option value="{{ $type }}" selected>{{ $value }}</option>
+                                            {{ $isSelected = true }}
+                                        @endif
+                                    @endforeach
+                                    @if(!$isSelected)
+                                        <option value="{{ $key }}">{{ $value }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        @else
+                            {{ Form::select('type[]', $jobTypes, $job->type, ['class' => 'form-control', 'multiple', 'required']) }}
                         @endif
-                    @endif
+
+                        {{--                        {{ Form::select('type[]', $jobTypes, $job->type, ['class' => 'form-control', 'multiple', 'required']) }}--}}
+                        <p class="help-block">Tips! Håll in Ctrl (Windows) eller Cmd (Mac) för att välja flera.</p>
+                    </div>
+                    {{--                        @endif--}}
+                    {{--                    @endif--}}
 
                     <div class="form-group col-lg-6">
                         <label for="work_place">Arbetsplats</label>
@@ -69,27 +71,11 @@
                         <label for="latest_application_date">Sista ansökan</label>
                         {!! Form::date('latest_application_date', $job->latest_application_date, ['class' => 'form-control']) !!}
                     </div>
-                    {{--<div class="form-group col-lg-3">--}}
-                    {{--<label for="published_at">Publicerad</label>--}}
-                    {{--{!! Form::date('published_at', Carbon\Carbon::parse($job->published_at), ['class' => 'form-control']) !!}--}}
-                    {{--</div>--}}
 
-                    @if (!empty($allFilters))
-                        @if(array_key_exists('lan', $allFilters))
-                            <div class="form-group col-lg-4">
-                                <label for="county">Län</label>
-                                <select name="county" class="form-control">
-                                    <option value=''>Välj ett län..</option>
-                                    <option value='155' {{ $job->county === 'Norge' || $job->county === '155' ? 'selected' : '' }}>Norge</option>
-                                    <option value='' disabled>--------</option>
-
-                                    @foreach($allFilters['lan'] as $key => $option)
-                                        <option value={{ $key }} label='{{ $option }}' name='{{ $option }}' {{($job->county == $key) ? 'selected' : ''}} >{{ $option }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        @endif
-                    @endif
+                    <div class="form-group col-lg-4">
+                        <label for="county">Län</label>
+                        {{ Form::select('county', $counties, $job->county, ['class' => 'form-control', 'required']) }}
+                    </div>
 
                     <div class="form-group col-lg-4">
                         <label for="municipality">Kommun</label>
