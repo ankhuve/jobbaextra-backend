@@ -328,8 +328,6 @@ class DashboardController extends Controller
 
         $request->session()->flash('status', 'Sparat! Du kan nu skapa ett nytt jobb om du vill.');
 
-        event(new JobCreated($job, $request));
-
         return back();
 
 //        return view('dashboard.company.edit', compact('company', 'job'));

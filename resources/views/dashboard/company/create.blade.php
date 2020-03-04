@@ -25,15 +25,11 @@
             <div class="panel-body">
 
                 <div class="row">
-                    @if (!empty($allFilters))
-                        @if(array_key_exists('yrkesomraden', $allFilters))
-                            <div class="form-group col-lg-6">
-                                <label for="type">Yrkesområde</label>
-                                {{ Form::select('type[]', $allFilters['yrkesomraden'], null, ['class' => 'form-control', 'multiple', 'required', 'data-form-array' => 'type']) }}
-                                <p class="help-block">Tips! Håll in Ctrl (Windows) eller Cmd (Mac) för att välja flera.</p>
-                            </div>
-                        @endif
-                    @endif
+                    <div class="form-group col-lg-6">
+                        <label for="type">Yrkesområde</label>
+                        {{ Form::select('type[]', $jobTypes, null, ['class' => 'form-control', 'multiple', 'required']) }}
+                        <p class="help-block">Tips! Håll in Ctrl (Windows) eller Cmd (Mac) för att välja flera.</p>
+                    </div>
 
                     <div class="form-group col-lg-6">
                         <label for="work_place">Arbetsplats</label>
@@ -60,25 +56,10 @@
 
                     {{--{{ dd($allFilters['lan']) }}--}}
 
-                    @if (!empty($allFilters))
-                        {{--{{ dd($allFilters) }}--}}
-                        @if(array_key_exists('lan', $allFilters))
-                            <div class="form-group col-lg-4">
-                                <label for="county">Län</label>
-                                <select name="county" class="form-control" required>
-                                    <option value=''>Välj ett län..</option>
-                                    <option value='155'>Norge</option>
-                                    <option value='' disabled>--------</option>
-
-                                    @foreach($allFilters['lan'] as $key => $option)
-                                        <option value={{ $key }} label='{{ $option }}' name='{{ $option }}' {{(null== $key) ? 'selected' : ''}} >{{ $option }}</option>
-                                    @endforeach
-                                </select>
-
-                                {{--                                {{ Form::select('county', $allFilters['lan'], null, ['class' => 'form-control', 'placeholder' => 'Välj ett län..']) }}--}}
-                            </div>
-                        @endif
-                    @endif
+                    <div class="form-group col-lg-4">
+                        <label for="county">Län</label>
+                        {{ Form::select('county', $counties, null, ['class' => 'form-control', 'required']) }}
+                    </div>
 
                     <div class="form-group col-lg-4">
                         <label for="municipality">Kommun</label>
